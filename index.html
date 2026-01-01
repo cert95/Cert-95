@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فريق CERT95 | فريق الأمن السيبراني التطوعي</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2E7D32;
+            --secondary: #1565C0;
+            --accent: #FF8F00;
+            --dark: #0A1A0F;
+            --light: #F5F9F6;
+            --gray: #2E3A34;
+            --light-green: #E8F5E9;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--light);
+            color: #333;
+            line-height: 1.8;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(46, 125, 50, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(21, 101, 192, 0.05) 0%, transparent 40%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        section {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            font-size: 1rem;
+            box-shadow: 0 4px 12px rgba(46, 125, 50, 0.2);
+        }
+
+        .btn:hover {
+            background-color: #1B5E20;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(46, 125, 50, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary);
+            box-shadow: 0 4px 12px rgba(21, 101, 192, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background-color: #0D47A1;
+            box-shadow: 0 6px 15px rgba(21, 101, 192, 0.3);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 50%;
+            transform: translateX(50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to left, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .highlight {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .grid {
+            display: grid;
+            gap: 30px;
+        }
+
+        .grid-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .grid-4 {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            object-fit: cover;
+            box-shadow: 0 4px 12px rgba(46, 125, 50, 0.3);
+            border: 2px solid var(--primary);
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-text .main {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--primary);
+            line-height: 1.2;
+        }
+
+        .logo-text .sub {
+            font-size: 0.9rem;
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+        }
+
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            position: relative;
+            padding: 5px 0;
+            transition: var(--transition);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 3px;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .hero {
+            padding-top: 150px;
+            padding-bottom: 100px;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(to left, #f0f9f0, #e6f2ff);
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3.2rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            color: var(--dark);
+        }
+
+        .hero-content .subtitle {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: var(--gray);
+            margin-bottom: 35px;
+            max-width: 600px;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .hero-visual {
+            position: relative;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cert-logo {
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(46, 125, 50, 0.25);
+            animation: float 6s ease-in-out infinite;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        .cert-logo::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            bottom: -10px;
+            left: -10px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0.3;
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        .logo-img-large {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .logo-fallback {
+            font-family: 'Tajawal', sans-serif;
+            font-weight: 900;
+            font-size: 5rem;
+            color: white;
+            line-height: 1;
+        }
+
+        .about {
+            background-color: white;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-content h2 {
+            font-size: 2.3rem;
+            margin-bottom: 25px;
+            color: var(--primary);
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: var(--gray);
+        }
+
+        .mission-list {
+            list-style: none;
+            margin-top: 25px;
+        }
+
+        .mission-list li {
+            margin-bottom: 15px;
+            padding-right: 25px;
+            position: relative;
+            color: var(--gray);
+        }
+
+        .mission-list li::before {
+            content: '✓';
+            position: absolute;
+            right: 0;
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .about-visual {
+            position: relative;
+            height: 500px;
+            background-color: var(--light-green);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .shield-icon {
+            font-size: 10rem;
+            color: var(--primary);
+            opacity: 0.8;
+        }
+
+        .team-section {
+            background-color: #f9fdf9;
+        }
+
+        .team-leader {
+            max-width: 800px;
+            margin: 0 auto 80px;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            border-top: 8px solid var(--primary);
+        }
+
+        .leader-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: var(--accent);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 10px rgba(255, 143, 0, 0.3);
+        }
+
+        .leader-avatar {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            border: 5px solid white;
+        }
+
+        .leader-avatar i {
+            font-size: 5rem;
+            color: white;
+        }
+
+        .leader-info h3 {
+            font-size: 2rem;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .leader-title {
+            font-size: 1.3rem;
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .leader-description {
+            font-size: 1.1rem;
+            color: var(--gray);
+            margin-bottom: 25px;
+            max-width: 700px;
+            line-height: 1.8;
+        }
+
+        .leader-contact {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 25px;
+            background-color: var(--light-green);
+            border-radius: 10px;
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .contact-link:hover {
+            background-color: white;
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .objectives {
+            background-color: white;
+        }
+
+        .objective-card {
+            background: white;
+            border-radius: 15px;
+            padding: 35px 30px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            border-top: 5px solid var(--primary);
+            height: 100%;
+        }
+
+        .objective-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .objective-icon {
+            width: 70px;
+            height: 70px;
+            background-color: rgba(46, 125, 50, 0.1);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            color: var(--primary);
+        }
+
+        .objective-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .objective-card p {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+
+        .features {
+            background-color: #f9fdf9;
+        }
+
+        .feature-list {
+            list-style: none;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .feature-item {
+            background: white;
+            border-radius: 15px;
+            padding: 25px 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+            border-right: 5px solid var(--primary);
+            transition: var(--transition);
+        }
+
+        .feature-item:hover {
+            transform: translateX(-10px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(46, 125, 50, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 20px;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .feature-header h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0;
+            color: var(--dark);
+        }
+
+        .feature-item p {
+            color: var(--gray);
+            padding-right: 70px;
+        }
+
+        .disclaimer {
+            background-color: white;
+            border-top: 1px solid #e0e0e0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .disclaimer-box {
+            background-color: #FFF8E1;
+            border-radius: 15px;
+            padding: 30px;
+            border-right: 5px solid var(--accent);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .disclaimer-box h3 {
+            color: var(--accent);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .disclaimer-box p {
+            color: #5D4037;
+            line-height: 1.8;
+        }
+
+        .contact-section {
+            background: linear-gradient(to left, #0A1A0F, #1B3A1B);
+            color: white;
+        }
+
+        .contact-section .section-title h2 {
+            color: white;
+        }
+
+        .contact-section .section-title p {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .contact-section .section-title h2::after {
+            background: linear-gradient(to left, #FF8F00, #FFB74D);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .contact-info h3 {
+            color: white;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+        }
+
+        .contact-details {
+            margin-bottom: 40px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .contact-text h4 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: white;
+        }
+
+        .contact-text p {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            font-size: 1.3rem;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .telegram-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 15px 30px;
+            background-color: var(--secondary);
+            border-radius: 10px;
+            transition: var(--transition);
+            margin-top: 20px;
+        }
+
+        .telegram-link:hover {
+            background-color: #0D47A1;
+            transform: translateY(-5px);
+        }
+
+        footer {
+            background-color: var(--dark);
+            padding: 60px 0 30px;
+            color: white;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-col h3 {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            color: white;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--primary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-block;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            transform: translateX(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        .copyright p {
+            margin-bottom: 10px;
+        }
+
+        @keyframes shine {
+            0% {
+                transform: translateX(-100%) translateY(-100%) rotate(45deg);
+            }
+            100% {
+                transform: translateX(100%) translateY(100%) rotate(45deg);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.3;
+            }
+            50% {
+                transform: scale(1.05);
+                opacity: 0.5;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+            
+            .grid-4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .hero-grid, .about-grid, .contact-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 40px;
+            }
+            
+            .hero-visual {
+                height: 400px;
+                order: -1;
+            }
+            
+            .grid-3 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 300px;
+                height: 100vh;
+                background: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 30px;
+                transition: var(--transition);
+                z-index: 1000;
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .overlay {
+                position: fixed;
+                top: 0;
+                right: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 999;
+                opacity: 0;
+                visibility: hidden;
+                transition: var(--transition);
+            }
+            
+            .overlay.active {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-content .subtitle {
+                font-size: 1.5rem;
+            }
+            
+            .grid-2, .grid-3 {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-btns {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .footer-col h3::after {
+                right: 50%;
+                transform: translateX(50%);
+            }
+            
+            .feature-item p {
+                padding-right: 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            section {
+                padding: 60px 0;
+            }
+            
+            .hero {
+                padding-top: 130px;
+                padding-bottom: 80px;
+            }
+            
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+            
+            .cert-logo {
+                width: 250px;
+                height: 250px;
+            }
+            
+            .leader-contact {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .contact-link {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <a href="#home" class="logo">
+                <!-- سيقوم الكود بمحاولة تحميل الصورة من المجلد الحالي -->
+                <img src="./cert95-logo.png" alt="شعار CERT95" class="logo-img" id="logoImg">
+                <div class="logo-text">
+                    <span class="main">CERT95</span>
+                    <span class="sub">فريق الأمن السيبراني التطوعي</span>
+                </div>
+            </a>
+            
+            <nav>
+                <div class="overlay" id="overlay"></div>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#home">الرئيسية</a></li>
+                    <li><a href="#about">عن الفريق</a></li>
+                    <li><a href="#leader">قائد الفريق</a></li>
+                    <li><a href="#objectives">أهدافنا</a></li>
+                    <li><a href="#contact">تواصل معنا</a></li>
+                </ul>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <div class="subtitle">فريق الأمن السيبراني التطوعي</div>
+                    <h1>فريق <span class="highlight">CERT95</span> التطوعي</h1>
+                    <p>فريق تطوعي شبابي غير ربحي، يعمل في مجال الاستجابة الأولية للحوادث السيبرانية والتوعية بالأمن السيبراني، ويقوده المدرب الدولي المعتمد المهندس أحمد حسين.</p>
+                    <div class="hero-btns">
+                        <a href="#contact" class="btn">تواصل معنا</a>
+                        <a href="#about" class="btn btn-secondary">تعرف على الفريق</a>
+                    </div>
+                </div>
+                
+                <div class="hero-visual">
+                    <div class="cert-logo" id="mainLogo">
+                        <!-- سيقوم الكود بمحاولة تحميل الصورة من المجلد الحالي -->
+                        <img src="./cert95-logo.png" alt="شعار CERT95" class="logo-img-large" id="mainLogoImg">
+                        <div class="logo-fallback" id="logoFallback">CERT</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>عن فريق <span class="highlight">CERT95</span></h2>
+                <p>فريق تطوعي شبابي غير ربحي يعمل في مجال الاستجابة الأولية للحوادث السيبرانية والتوعية بالأمن السيبراني</p>
+            </div>
+            
+            <div class="about-grid">
+                <div class="about-content">
+                    <h2>رسالة الفريق</h2>
+                    <p>فريق CERT95 هو فريق تطوعي شبابي غير ربحي، يعمل في مجال الاستجابة الأولية للحوادث السيبرانية والتوعية بالأمن السيبراني، ويقوده المدرب الدولي المعتمد المهندس أحمد حسين.</p>
+                    <p>يهدف الفريق إلى تقديم الدعم التوعوي والاستشاري في مجال الأمن السيبراني للجامعات والمعاهد والمؤسسات التعليمية، وكذلك للأساتذة والطلبة وأفراد المجتمع.</p>
+                    <p>كما يعمل الفريق، في حدود طاقته التطوعية، على تقديم المساندة التوجيهية الأولية للأفراد الذين يتعرضون لحالات ابتزاز أو اختراق إلكتروني، من خلال إرشادهم إلى أفضل الممارسات الأمنية والإجراءات الوقائية المناسبة.</p>
+                    
+                    <ul class="mission-list">
+                        <li>تنظيم وتقديم محاضرات وورش عمل حضورية وإلكترونية</li>
+                        <li>نشر الوعي بمفاهيم الأمن السيبراني وأساليب الوقاية</li>
+                        <li>تقديم الإرشادات والنصائح العامة لحماية الأجهزة والبيانات الرقمية</li>
+                        <li>توسيع قاعدة أعضائه من المتطوعين ذوي الكفاءة والخبرة</li>
+                    </ul>
+                </div>
+                
+                <div class="about-visual">
+                    <i class="fas fa-shield-alt shield-icon"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="team-section" id="leader">
+        <div class="container">
+            <div class="section-title">
+                <h2>قائد الفريق</h2>
+                <p>المدرب الدولي المعتمد المهندس أحمد حسين</p>
+            </div>
+            
+            <div class="team-leader">
+                <div class="leader-badge">قائد الفريق</div>
+                
+                <div class="leader-avatar">
+                    <i class="fas fa-user-tie"></i>
+                </div>
+                
+                <div class="leader-info">
+                    <h3>المهندس أحمد حسين</h3>
+                    <div class="leader-title">مدرب دولي معتمد في الأمن السيبراني</div>
+                    <div class="leader-description">
+                        قائد فريق CERT95 التطوعي، يتمتع بخبرة واسعة في مجال الأمن السيبراني والاستجابة للحوادث الإلكترونية. يقود الفريق في تقديم الدعم التوعوي والاستشاري في مجال الأمن السيبراني للجامعات والمؤسسات التعليمية والأفراد.
+                    </div>
+                    
+                    <div class="leader-contact">
+                        <a href="https://t.me/AhmedCERT95" target="_blank" class="contact-link">
+                            <i class="fab fa-telegram"></i>
+                            <span>التواصل عبر تليجرام</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="objectives" id="objectives">
+        <div class="container">
+            <div class="section-title">
+                <h2>أهداف فريق <span class="highlight">CERT95</span></h2>
+                <p>الأهداف الرئيسية التي نسعى لتحقيقها من خلال عملنا التطوعي</p>
+            </div>
+            
+            <div class="grid grid-3">
+                <div class="objective-card">
+                    <div class="objective-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>التوعية والتعليم</h3>
+                    <p>تقديم الدعم التوعوي والاستشاري في مجال الأمن السيبراني للجامعات والمعاهد والمؤسسات التعليمية، وكذلك للأساتذة والطلبة وأفراد المجتمع.</p>
+                </div>
+                
+                <div class="objective-card">
+                    <div class="objective-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h3>الدعم والمساندة</h3>
+                    <p>تقديم المساندة التوجيهية الأولية للأفراد الذين يتعرضون لحالات ابتزاز أو اختراق إلكتروني، من خلال إرشادهم إلى أفضل الممارسات الأمنية.</p>
+                </div>
+                
+                <div class="objective-card">
+                    <div class="objective-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>توسيع قاعدة المتطوعين</h3>
+                    <p>يسعى الفريق إلى توسيع قاعدة أعضائه من المتطوعين من ذوي الكفاءة والخبرة في مجال الأمن السيبراني، بهدف تعزيز قدراته في تقديم الدعم المجتمعي.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>أنشطة فريق <span class="highlight">CERT95</span></h2>
+                <p>الخدمات والأنشطة التي يقدمها فريقنا التطوعي</p>
+            </div>
+            
+            <ul class="feature-list">
+                <li class="feature-item">
+                    <div class="feature-header">
+                        <div class="feature-icon">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <h3>محاضرات وورش عمل</h3>
+                    </div>
+                    <p>تنظيم وتقديم محاضرات وورش عمل حضورية وإلكترونية في مجال الأمن السيبراني للجامعات والمؤسسات التعليمية والأفراد.</p>
+                </li>
+                
+                <li class="feature-item">
+                    <div class="feature-header">
+                        <div class="feature-icon">
+                            <i class="fas fa-bullhorn"></i>
+                        </div>
+                        <h3>نشر الوعي الأمني</h3>
+                    </div>
+                    <p>نشر الوعي بمفاهيم الأمن السيبراني وأساليب الوقاية من التهديدات الرقمية عبر مختلف المنصات والقنوات.</p>
+                </li>
+                
+                <li class="feature-item">
+                    <div class="feature-header">
+                        <div class="feature-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h3>إرشادات ونصائح أمنية</h3>
+                    </div>
+                    <p>تقديم الإرشادات والنصائح العامة المتعلقة بحماية الأجهزة والبيانات الرقمية للأفراد والمؤسسات.</p>
+                </li>
+                
+                <li class="feature-item">
+                    <div class="feature-header">
+                        <div class="feature-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h3>استقبال البلاغات والاستفسارات</h3>
+                    </div>
+                    <p>يستقبل فريق CERT95 شهريًا عددًا من البلاغات والاستفسارات المتعلقة بحوادث إلكترونية، ويتم التعامل معها بصفة تطوعية وتوعوية.</p>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="disclaimer">
+        <div class="container">
+            <div class="disclaimer-box">
+                <h3><i class="fas fa-exclamation-triangle"></i> إخلاء مسؤولية</h3>
+                <p>يعمل فريق CERT95 في حدود طاقته التطوعية على تقديم المساندة التوجيهية الأولية للأفراد الذين يتعرضون لحالات ابتزاز أو اختراق إلكتروني، من خلال إرشادهم إلى أفضل الممارسات الأمنية والإجراءات الوقائية المناسبة، <strong>دون أن يتحمل الفريق أو أعضاؤه أي مسؤولية قانونية أو تقنية مباشرة عن استخدام تلك الإرشادات.</strong> كما أن جميع الأنشطة تتم بموافقة أصحاب البيانات وضمن حدود الضرورة، وبما يتوافق مع القوانين والأنظمة النافذة.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>تواصل مع فريق <span class="highlight">CERT95</span></h2>
+                <p>نرحب باستفساراتكم وبلاغاتكم في مجال الأمن السيبراني</p>
+            </div>
+            
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>طرق التواصل مع الفريق</h3>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>قائد الفريق</h4>
+                                <p>المهندس أحمد حسين - مدرب دولي معتمد</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fab fa-telegram"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>قناة تليجرام الرسمية</h4>
+                                <p>للتواصل المباشر مع قائد الفريق</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>الاستفسارات العامة</h4>
+                                <p>للاستفسارات والبلاغات المتعلقة بالحوادث السيبرانية</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h3 style="margin-top: 40px;">تابعنا على وسائل التواصل</h3>
+                    <div class="social-links">
+                        <a href="https://t.me/AhmedCERT95" target="_blank" class="social-link">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="https://www.tiktok.com/@cybersecurit95?_r=1&_t=ZS-91oBnZTuQTf" target="_blank" class="social-link">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                    
+                    <a href="https://t.me/AhmedCERT95" target="_blank" class="telegram-link">
+                        <i class="fab fa-telegram"></i> تواصل معنا عبر تليجرام
+                    </a>
+                </div>
+                
+                <div class="contact-info">
+                    <h3>معلومات مهمة</h3>
+                    
+                    <div class="feature-item" style="background: rgba(255, 255, 255, 0.1); border-radius: 15px; padding: 25px; margin-bottom: 20px; border-right: 5px solid var(--accent);">
+                        <div class="feature-header">
+                            <div class="feature-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <h3 style="color: white; margin-bottom: 0;">الاستجابة للبلاغات</h3>
+                        </div>
+                        <p style="color: rgba(255, 255, 255, 0.9);">يستقبل فريق CERT95 شهريًا عددًا من البلاغات والاستفسارات المتعلقة بحوادث إلكترونية، ويتم التعامل معها بصفة تطوعية وتوعوية وبما يتوافق مع القوانين والأنظمة النافذة.</p>
+                    </div>
+                    
+                    <div class="feature-item" style="background: rgba(255, 255, 255, 0.1); border-radius: 15px; padding: 25px; margin-bottom: 20px; border-right: 5px solid var(--primary);">
+                        <div class="feature-header">
+                            <div class="feature-icon">
+                                <i class="fas fa-user-shield"></i>
+                            </div>
+                            <h3 style="color: white; margin-bottom: 0;">احترام الخصوصية</h3>
+                        </div>
+                        <p style="color: rgba(255, 255, 255, 0.9);">نؤكد على احترام الخصوصية وعدم الاحتفاظ بالبيانات إلا في حدود الضرورة وبموافقة أصحابها. جميع التعاملات تتم بأقصى درجات السرية والأمان.</p>
+                    </div>
+                    
+                    <div class="feature-item" style="background: rgba(255, 255, 255, 0.1); border-radius: 15px; padding: 25px; margin-bottom: 20px; border-right: 5px solid var(--secondary);">
+                        <div class="feature-header">
+                            <div class="feature-icon">
+                                <i class="fas fa-hands-helping"></i>
+                            </div>
+                            <h3 style="color: white; margin-bottom: 0;">عمل تطوعي غير ربحي</h3>
+                        </div>
+                        <p style="color: rgba(255, 255, 255, 0.9);">جميع خدمات فريق CERT95 تقدم بشكل تطوعي وغير ربحي، بهدف خدمة الصالح العام ورفع مستوى الوعي المجتمعي بمخاطر التهديدات الإلكترونية وسبل الحد منها.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="logo" style="margin-bottom: 20px;">
+                        <img src="./cert95-logo.png" alt="شعار CERT95" class="logo-img" style="width: 50px; height: 50px;">
+                        <div class="logo-text">
+                            <span class="main" style="font-size: 1.6rem; color: white;">CERT95</span>
+                            <span class="sub" style="color: rgba(255, 255, 255, 0.7);">فريق الأمن السيبراني التطوعي</span>
+                        </div>
+                    </div>
+                    <p style="color: rgba(255, 255, 255, 0.7); margin-bottom: 20px;">فريق تطوعي شبابي غير ربحي يعمل في مجال الاستجابة الأولية للحوادث السيبرانية والتوعية بالأمن السيبراني.</p>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>روابط سريعة</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">الرئيسية</a></li>
+                        <li><a href="#about">عن الفريق</a></li>
+                        <li><a href="#leader">قائد الفريق</a></li>
+                        <li><a href="#objectives">أهدافنا</a></li>
+                        <li><a href="#contact">تواصل معنا</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>وسائل التواصل</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://t.me/AhmedCERT95" target="_blank">تليجرام قائد الفريق</a></li>
+                        <li><a href="https://www.tiktok.com/@cybersecurit95" target="_blank">تيك توك الفريق</a></li>
+                        <li><a href="#">انستغرام الفريق</a></li>
+                        <li><a href="#contact">قنوات التواصل الأخرى</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2023 فريق CERT95 التطوعي. جميع الحقوق محفوظة.</p>
+                <p>فريق الأمن السيبراني التطوعي - عمل تطوعي غير ربحي</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // دالة للتحقق من وجود الصورة
+        function checkImageExists(imageUrl, callback) {
+            const img = new Image();
+            img.onload = function() {
+                callback(true);
+            };
+            img.onerror = function() {
+                callback(false);
+            };
+            img.src = imageUrl;
+        }
+
+        // معالجة الشعارات عند تحميل الصفحة
+        window.addEventListener('DOMContentLoaded', () => {
+            const logoImg = document.getElementById('logoImg');
+            const mainLogoImg = document.getElementById('mainLogoImg');
+            const logoFallback = document.getElementById('logoFallback');
+            
+            // محاولة تحميل الصورة الرئيسية
+            checkImageExists('./cert95-logo.png', function(exists) {
+                if (!exists) {
+                    // إذا لم توجد الصورة، إخفاء عناصر الصور وإظهار البدائل
+                    if (logoImg) logoImg.style.display = 'none';
+                    if (mainLogoImg) mainLogoImg.style.display = 'none';
+                    if (logoFallback) logoFallback.style.display = 'block';
+                    
+                    // تحديث النص البديل للشعار الرئيسي
+                    if (logoFallback) {
+                        logoFallback.innerHTML = 'CERT95';
+                        logoFallback.style.fontSize = '4rem';
+                    }
+                } else {
+                    // إذا وجدت الصورة، إظهارها وإخفاء البدائل
+                    if (logoFallback) logoFallback.style.display = 'none';
+                }
+            });
+            
+            // Mobile menu toggle
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navLinks = document.getElementById('navLinks');
+            const overlay = document.getElementById('overlay');
+            
+            mobileMenuBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                overlay.classList.toggle('active');
+                mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
+                    ? '<i class="fas fa-times"></i>' 
+                    : '<i class="fas fa-bars"></i>';
+            });
+            
+            overlay.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                overlay.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+            
+            // Close mobile menu when clicking a link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    overlay.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                });
+            });
+
+            // إضافة تأثير الحركة للشعار الرئيسي
+            const certLogo = document.querySelector('.cert-logo');
+            if (certLogo) {
+                certLogo.style.animation = 'float 6s ease-in-out infinite';
+            }
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+                header.style.backgroundColor = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.boxShadow = '0 2px 15px rgba(0, 0, 0, 0.08)';
+                header.style.backgroundColor = 'rgba(255, 255, 255, 0.98)';
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements
+        document.querySelectorAll('.objective-card, .feature-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
