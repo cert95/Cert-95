@@ -16,6 +16,10 @@
             --gray: #2E3A34;
             --light-green: #E8F5E9;
             --transition: all 0.3s ease;
+            --success: #4CAF50;
+            --info: #2196F3;
+            --warning: #FF9800;
+            --danger: #F44336;
         }
 
         * {
@@ -157,6 +161,299 @@
             grid-template-columns: repeat(4, 1fr);
         }
 
+        /* تخصيصات قسم الأخبار الجديدة */
+        .news-section {
+            background-color: #f8fbf9;
+            position: relative;
+        }
+
+        .news-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%232e7d32' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .news-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .news-card.featured {
+            border: 2px solid var(--accent);
+            grid-column: span 2;
+        }
+
+        .news-image-container {
+            position: relative;
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .news-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .news-card:hover .news-image {
+            transform: scale(1.08);
+        }
+
+        .news-category {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: white;
+            z-index: 2;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .category-event {
+            background: linear-gradient(135deg, var(--primary), #4CAF50);
+        }
+
+        .category-workshop {
+            background: linear-gradient(135deg, var(--secondary), #2196F3);
+        }
+
+        .category-achievement {
+            background: linear-gradient(135deg, var(--accent), #FF9800);
+        }
+
+        .category-announcement {
+            background: linear-gradient(135deg, #9C27B0, #E91E63);
+        }
+
+        .category-security {
+            background: linear-gradient(135deg, #607D8B, #455A64);
+        }
+
+        .news-date {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            direction: ltr;
+            text-align: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .news-date .day {
+            font-size: 1.3rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .news-date .month {
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .news-content {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .news-title {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+            line-height: 1.4;
+            transition: color 0.3s ease;
+        }
+
+        .news-card:hover .news-title {
+            color: var(--primary);
+        }
+
+        .news-excerpt {
+            color: var(--gray);
+            margin-bottom: 20px;
+            line-height: 1.7;
+            flex-grow: 1;
+        }
+
+        .news-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .news-author {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .author-avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: var(--light-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .author-name {
+            font-size: 0.9rem;
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        .news-read-more {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+            padding: 8px 16px;
+            border-radius: 8px;
+            background-color: rgba(21, 101, 192, 0.05);
+        }
+
+        .news-read-more:hover {
+            background-color: rgba(21, 101, 192, 0.15);
+            transform: translateX(-5px);
+        }
+
+        .news-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .news-tag {
+            background-color: rgba(46, 125, 50, 0.1);
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .loading-news {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 0;
+        }
+
+        .spinner {
+            border: 4px solid rgba(46, 125, 50, 0.1);
+            border-left-color: var(--primary);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .news-filter {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--gray);
+        }
+
+        .filter-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .filter-btn.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .no-news {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 0;
+            color: var(--gray);
+            font-size: 1.2rem;
+        }
+
+        .no-news i {
+            font-size: 3rem;
+            color: #ddd;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .news-archive-link {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        /* بقية الأنماط الأصلية تبقى كما هي */
         header {
             position: fixed;
             top: 0;
@@ -928,6 +1225,10 @@
             .grid-4 {
                 grid-template-columns: repeat(2, 1fr);
             }
+            
+            .news-card.featured {
+                grid-column: span 1;
+            }
         }
 
         @media (max-width: 992px) {
@@ -944,6 +1245,10 @@
             
             .activities-grid, .grid-3 {
                 grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .news-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             }
             
             .nav-links {
@@ -1033,6 +1338,16 @@
             .activity-content h3 {
                 font-size: 1.3rem;
             }
+            
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .news-filter {
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding-bottom: 10px;
+            }
         }
 
         @media (max-width: 576px) {
@@ -1067,6 +1382,18 @@
             .activity-img {
                 height: 200px;
             }
+            
+            .news-image-container {
+                height: 180px;
+            }
+            
+            .news-content {
+                padding: 20px;
+            }
+            
+            .news-title {
+                font-size: 1.2rem;
+            }
         }
     </style>
 </head>
@@ -1087,6 +1414,7 @@
                     <li><a href="#home">الرئيسية</a></li>
                     <li><a href="#about">عن الفريق</a></li>
                     <li><a href="#activities">النشاطات</a></li>
+                    <li><a href="#news">الأخبار</a></li>
                     <li><a href="#leader">قائد الفريق</a></li>
                     <li><a href="#objectives">أهدافنا</a></li>
                     <li><a href="#contact">تواصل معنا</a></li>
@@ -1106,7 +1434,7 @@
                     <h1>فريق <span class="highlight">CERT95</span> التطوعي</h1>
                     <p>فريق تطوعي شبابي غير ربحي، يعمل في مجال الاستجابة الأولية للحوادث السيبرانية والتوعية بالأمن السيبراني، ويقوده المدرب الدولي المعتمد المهندس أحمد حسين.</p>
                     <div class="hero-btns">
-                        <a href="#activities" class="btn">نشاطات الفريق</a>
+                        <a href="#news" class="btn">آخر الأخبار</a>
                         <a href="#about" class="btn btn-secondary">تعرف على الفريق</a>
                     </div>
                 </div>
@@ -1213,6 +1541,38 @@
                 <p style="max-width: 900px; margin: 0 auto; font-size: 1.1rem; color: var(--gray);">
                     بكل فخر واعتزاز، وبقيادتي المتواضعة، أثبت فريق CERT95 مرةً أخرى أنه فريق يعتمد عليه علميًا وعمليًا. أنا فخور جدًا بأعضاء CERT95، فقد أثبتم خلال الورشة قوتكم العلمية، وعمق خبرتكم، وتميّزكم في مجال الأمن السيبراني، ونجحتم في إبهار جميع الحضور من دكاترة وطلبة بالمحتوى العلمي المتقدم، والتطبيق العملي، والأسلوب الاحترافي الراقي.
                 </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الأخبار الجديد -->
+    <section class="news-section" id="news">
+        <div class="container">
+            <div class="section-title">
+                <h2>أخبار <span class="highlight">CERT95</span></h2>
+                <p>آخر المستجدات والأخبار عن نشاطات فريقنا التطوعي</p>
+            </div>
+            
+            <div class="news-filter" id="newsFilter">
+                <button class="filter-btn active" data-category="all">الكل</button>
+                <button class="filter-btn" data-category="event">الفعاليات</button>
+                <button class="filter-btn" data-category="workshop">ورش عمل</button>
+                <button class="filter-btn" data-category="achievement">إنجازات</button>
+                <button class="filter-btn" data-category="announcement">إعلانات</button>
+                <button class="filter-btn" data-category="security">نصائح أمنية</button>
+            </div>
+            
+            <div id="news-container" class="news-grid">
+                <div class="loading-news">
+                    <div class="spinner"></div>
+                    <p>جاري تحميل الأخبار...</p>
+                </div>
+            </div>
+            
+            <div class="news-archive-link" style="text-align: center; margin-top: 40px;">
+                <a href="#news" id="load-more-news" class="btn btn-secondary" style="display: none;">
+                    <i class="fas fa-plus"></i> تحميل المزيد من الأخبار
+                </a>
             </div>
         </div>
     </section>
@@ -1462,6 +1822,7 @@
                         <li><a href="#home">الرئيسية</a></li>
                         <li><a href="#about">عن الفريق</a></li>
                         <li><a href="#activities">النشاطات</a></li>
+                        <li><a href="#news">الأخبار</a></li>
                         <li><a href="#leader">قائد الفريق</a></li>
                         <li><a href="#objectives">أهدافنا</a></li>
                         <li><a href="#contact">تواصل معنا</a></li>
@@ -1611,6 +1972,9 @@
                 if (certLogo) {
                     certLogo.style.animation = 'float 6s ease-in-out infinite';
                 }
+                
+                // تحميل الأخبار
+                loadNews();
             });
 
             // Header scroll effect
@@ -1661,12 +2025,191 @@
             }, observerOptions);
 
             // Observe elements
-            document.querySelectorAll('.objective-card, .feature-item, .activity-card').forEach(function(el) {
+            document.querySelectorAll('.objective-card, .feature-item, .activity-card, .news-card').forEach(function(el) {
                 el.style.opacity = '0';
                 el.style.transform = 'translateY(30px)';
                 el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
                 observer.observe(el);
             });
+            
+            // كود إدارة الأخبار
+            let allNews = [];
+            let currentFilter = 'all';
+            let displayedNews = 6;
+            
+            function loadNews() {
+                const newsContainer = document.getElementById('news-container');
+                const loadMoreBtn = document.getElementById('load-more-news');
+                
+                fetch('./news-data.json')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        allNews = data.news;
+                        displayNews();
+                        setupFilterButtons();
+                        
+                        if (allNews.length > displayedNews) {
+                            loadMoreBtn.style.display = 'inline-block';
+                            loadMoreBtn.addEventListener('click', loadMoreNews);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error loading news:', error);
+                        newsContainer.innerHTML = `
+                            <div class="no-news">
+                                <i class="fas fa-exclamation-circle"></i>
+                                <p>عذراً، حدث خطأ في تحميل الأخبار. يرجى المحاولة لاحقاً.</p>
+                            </div>
+                        `;
+                    });
+            }
+            
+            function displayNews() {
+                const newsContainer = document.getElementById('news-container');
+                const filteredNews = currentFilter === 'all' 
+                    ? allNews 
+                    : allNews.filter(news => news.category === currentFilter);
+                
+                const newsToDisplay = filteredNews.slice(0, displayedNews);
+                
+                if (newsToDisplay.length === 0) {
+                    newsContainer.innerHTML = `
+                        <div class="no-news">
+                            <i class="far fa-newspaper"></i>
+                            <p>لا توجد أخبار متاحة في هذا القسم حالياً.</p>
+                        </div>
+                    `;
+                    document.getElementById('load-more-news').style.display = 'none';
+                    return;
+                }
+                
+                newsContainer.innerHTML = newsToDisplay.map(news => createNewsCard(news)).join('');
+                
+                // إضافة تأثير الظهور للأخبار الجديدة
+                setTimeout(() => {
+                    document.querySelectorAll('.news-card').forEach(function(el) {
+                        el.style.opacity = '0';
+                        el.style.transform = 'translateY(30px)';
+                        el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                        observer.observe(el);
+                    });
+                }, 100);
+            }
+            
+            function createNewsCard(news) {
+                // تنسيق التاريخ
+                const dateObj = new Date(news.date);
+                const day = dateObj.getDate();
+                const month = dateObj.toLocaleString('ar-SA', { month: 'short' });
+                
+                // تحديد لون الفئة
+                let categoryClass = 'category-event';
+                switch(news.category) {
+                    case 'workshop': categoryClass = 'category-workshop'; break;
+                    case 'achievement': categoryClass = 'category-achievement'; break;
+                    case 'announcement': categoryClass = 'category-announcement'; break;
+                    case 'security': categoryClass = 'category-security'; break;
+                }
+                
+                // نص الفئة بالعربية
+                let categoryText = 'فعالية';
+                switch(news.category) {
+                    case 'workshop': categoryText = 'ورشة عمل'; break;
+                    case 'achievement': categoryText = 'إنجاز'; break;
+                    case 'announcement': categoryText = 'إعلان'; break;
+                    case 'security': categoryText = 'نصيحة أمنية'; break;
+                }
+                
+                // علامات التصنيف
+                const tagsHtml = news.tags ? news.tags.map(tag => 
+                    `<span class="news-tag">${sanitizeText(tag)}</span>`
+                ).join('') : '';
+                
+                // صورة البديل إذا لم توجد الصورة
+                const imageHtml = news.image ? 
+                    `<img src="${news.image}" alt="${sanitizeText(news.title)}" class="news-image" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\\'width:100%;height:100%;background:linear-gradient(135deg, var(--primary), var(--secondary));display:flex;align-items:center;justify-content:center;color:white;font-weight:bold;font-size:1.5rem;padding:20px;text-align:center\\'>${sanitizeText(news.title)}</div>';">` :
+                    `<div style="width:100%;height:100%;background:linear-gradient(135deg, var(--primary), var(--secondary));display:flex;align-items:center;justify-content:center;color:white;font-weight:bold;font-size:1.5rem;padding:20px;text-align:center">${sanitizeText(news.title)}</div>`;
+                
+                return `
+                    <div class="news-card ${news.featured ? 'featured' : ''}">
+                        <div class="news-image-container">
+                            ${imageHtml}
+                            <span class="news-category ${categoryClass}">${categoryText}</span>
+                            <div class="news-date">
+                                <div class="day">${day}</div>
+                                <div class="month">${month}</div>
+                            </div>
+                        </div>
+                        <div class="news-content">
+                            <h3 class="news-title">${sanitizeText(news.title)}</h3>
+                            <p class="news-excerpt">${sanitizeText(news.excerpt)}</p>
+                            ${tagsHtml ? `<div class="news-tags">${tagsHtml}</div>` : ''}
+                            <div class="news-meta">
+                                <div class="news-author">
+                                    <div class="author-avatar">${news.author ? news.author.charAt(0) : 'C'}</div>
+                                    <div class="author-name">${news.author ? sanitizeText(news.author) : 'فريق CERT95'}</div>
+                                </div>
+                                ${news.link ? `<a href="${news.link}" target="_blank" rel="noopener noreferrer" class="news-read-more">قراءة المزيد <i class="fas fa-arrow-left"></i></a>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            function setupFilterButtons() {
+                const filterButtons = document.querySelectorAll('.filter-btn');
+                filterButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        // إزالة النشط من جميع الأزرار
+                        filterButtons.forEach(btn => btn.classList.remove('active'));
+                        // إضافة النشط للزر المحدد
+                        this.classList.add('active');
+                        // تحديث الفلتر الحالي
+                        currentFilter = this.getAttribute('data-category');
+                        displayedNews = 6;
+                        displayNews();
+                        
+                        // إعادة عرض زر تحميل المزيد إذا كان هناك أخبار أكثر
+                        const filteredNews = currentFilter === 'all' 
+                            ? allNews 
+                            : allNews.filter(news => news.category === currentFilter);
+                        
+                        const loadMoreBtn = document.getElementById('load-more-news');
+                        if (filteredNews.length > displayedNews) {
+                            loadMoreBtn.style.display = 'inline-block';
+                        } else {
+                            loadMoreBtn.style.display = 'none';
+                        }
+                    });
+                });
+            }
+            
+            function loadMoreNews() {
+                displayedNews += 6;
+                displayNews();
+                
+                const filteredNews = currentFilter === 'all' 
+                    ? allNews 
+                    : allNews.filter(news => news.category === currentFilter);
+                
+                if (displayedNews >= filteredNews.length) {
+                    document.getElementById('load-more-news').style.display = 'none';
+                }
+                
+                // التمرير السلس إلى آخر خبر محمل
+                setTimeout(() => {
+                    const newsCards = document.querySelectorAll('.news-card');
+                    if (newsCards.length > 0) {
+                        const lastCard = newsCards[newsCards.length - 1];
+                        lastCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }
+                }, 100);
+            }
         })();
     </script>
 </body>
