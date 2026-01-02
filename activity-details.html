@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تفاصيل النشاطات | فريق CERT95</title>
+    <title>تفاصيل النشاط | فريق CERT95</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
     <style>
@@ -137,6 +137,8 @@
             color: var(--gray);
             line-height: 1.8;
             margin-bottom: 30px;
+            text-align: right;
+            padding: 0 20px;
         }
 
         .activity-tags {
@@ -144,6 +146,7 @@
             justify-content: center;
             flex-wrap: wrap;
             gap: 10px;
+            margin: 25px 0;
         }
 
         .tag {
@@ -153,6 +156,67 @@
             border-radius: 20px;
             font-size: 0.9rem;
             font-weight: 500;
+        }
+
+        .achievements {
+            background: rgba(46, 125, 50, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+            border-right: 4px solid var(--accent);
+        }
+
+        .achievements h4 {
+            color: var(--accent);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .achievements ul {
+            list-style: none;
+            padding-right: 20px;
+        }
+
+        .achievements li {
+            padding: 8px 0;
+            position: relative;
+            padding-right: 25px;
+        }
+
+        .achievements li::before {
+            content: '✓';
+            position: absolute;
+            right: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .external-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin: 25px 0;
+        }
+
+        .ext-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            background: rgba(21, 101, 192, 0.1);
+            color: var(--secondary);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .ext-link:hover {
+            background: rgba(21, 101, 192, 0.2);
+            transform: translateY(-3px);
         }
 
         .gallery-section {
@@ -211,6 +275,47 @@
 
         .gallery-item:hover .gallery-img {
             transform: scale(1.05);
+        }
+
+        .video-container {
+            grid-column: span 2;
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            height: 300px;
+        }
+
+        .video-thumbnail {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.9;
+        }
+
+        .play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 3px solid white;
+        }
+
+        .play-btn:hover {
+            background: rgba(255, 255, 255, 0.9);
+            color: black;
+            transform: translate(-50%, -50%) scale(1.1);
         }
 
         .lightbox {
@@ -434,6 +539,11 @@
                 grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             }
             
+            .video-container {
+                grid-column: span 1;
+                height: 250px;
+            }
+            
             .activities-grid {
                 grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             }
@@ -488,6 +598,10 @@
             .gallery-item {
                 height: 200px;
             }
+            
+            .video-container {
+                height: 200px;
+            }
         }
     </style>
 </head>
@@ -497,8 +611,8 @@
             <i class="fas fa-arrow-right"></i> العودة للنشاطات
         </a>
         <div class="container header-content">
-            <h1>معرض صور النشاطات</h1>
-            <p>استعرض جميع الصور والفعاليات التي قام بها فريق CERT95 التطوعي</p>
+            <h1>تفاصيل النشاط</h1>
+            <p>استعرض جميع الصور والفيديوهات والتفاصيل الكاملة للنشاط</p>
         </div>
     </div>
 
@@ -515,7 +629,7 @@
 
     <div class="gallery-section">
         <div class="container">
-            <h3 class="gallery-title">معرض الصور</h3>
+            <h3 class="gallery-title" id="gallery-title">معرض الصور والفيديوهات</h3>
             <div id="gallery-container" class="gallery-grid">
                 <!-- سيتم ملؤها بالجافاسكريبت -->
             </div>
@@ -561,7 +675,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             // الحصول على معرف النشاط من الرابط
             const urlParams = new URLSearchParams(window.location.search);
-            const activityId = urlParams.get('id') || '1'; // الافتراضي نشاط جامعة الإمام
+            const activityId = urlParams.get('id') || '1';
             
             // تحميل بيانات النشاطات
             loadActivityData(activityId);
@@ -571,7 +685,7 @@
         let allActivities = [];
         let currentActivity = null;
         let currentImageIndex = 0;
-        let allGalleryImages = [];
+        let allGalleryItems = [];
 
         async function loadActivityData(activityId) {
             try {
@@ -588,7 +702,7 @@
                 displayActivityDetails(currentActivity);
                 
                 // عرض المعرض
-                displayGallery(currentActivity.images || []);
+                displayGallery(currentActivity);
                 
                 // عرض جميع النشاطات
                 displayAllActivities();
@@ -628,6 +742,30 @@
                 `<span class="tag">${escapeHtml(tag)}</span>`
             ).join('') : '';
             
+            // إنشاء قائمة الإنجازات
+            const achievementsHtml = activity.achievements ? `
+                <div class="achievements">
+                    <h4><i class="fas fa-trophy"></i> الإنجازات والجوائز</h4>
+                    <ul>
+                        ${activity.achievements.map(achievement => 
+                            `<li>${escapeHtml(achievement)}</li>`
+                        ).join('')}
+                    </ul>
+                </div>
+            ` : '';
+            
+            // إنشاء الروابط الخارجية
+            const linksHtml = activity.links ? `
+                <div class="external-links">
+                    ${activity.links.map(link => 
+                        `<a href="${link.url}" target="_blank" class="ext-link">
+                            <i class="${link.icon}"></i>
+                            ${escapeHtml(link.title)}
+                        </a>`
+                    ).join('')}
+                </div>
+            ` : '';
+            
             container.innerHTML = `
                 <div class="activity-info">
                     <h2>${escapeHtml(activity.title)}</h2>
@@ -648,30 +786,76 @@
                     <div class="activity-description">
                         ${escapeHtml(activity.fullDescription || activity.description || '')}
                     </div>
+                    ${achievementsHtml}
+                    ${linksHtml}
                     ${tagsHtml ? `<div class="activity-tags">${tagsHtml}</div>` : ''}
                 </div>
             `;
+            
+            // تحديث عنوان المعرض إذا كان هناك فيديوهات
+            if (activity.videos && activity.videos.length > 0) {
+                document.getElementById('gallery-title').textContent = 'معرض الصور والفيديوهات';
+            }
         }
 
-        function displayGallery(images) {
+        function displayGallery(activity) {
             const container = document.getElementById('gallery-container');
-            allGalleryImages = images;
+            allGalleryItems = [];
             
-            if (!images || images.length === 0) {
+            // جمع جميع العناصر في مصفوفة واحدة
+            if (activity.images && activity.images.length > 0) {
+                activity.images.forEach((image, index) => {
+                    allGalleryItems.push({
+                        type: 'image',
+                        src: image,
+                        index: allGalleryItems.length
+                    });
+                });
+            }
+            
+            if (activity.videos && activity.videos.length > 0) {
+                activity.videos.forEach((video, index) => {
+                    allGalleryItems.push({
+                        type: 'video',
+                        url: video.url,
+                        thumbnail: video.thumbnail,
+                        title: video.title,
+                        index: allGalleryItems.length
+                    });
+                });
+            }
+            
+            if (allGalleryItems.length === 0) {
                 container.innerHTML = `
                     <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: var(--gray);">
                         <i class="fas fa-images" style="font-size: 3rem; margin-bottom: 20px; color: #ddd;"></i>
-                        <p>لا توجد صور متاحة لهذا النشاط</p>
+                        <p>لا توجد صور أو فيديوهات متاحة لهذا النشاط</p>
                     </div>
                 `;
                 return;
             }
             
-            container.innerHTML = images.map((image, index) => `
-                <div class="gallery-item" onclick="openLightbox(${index})">
-                    <img src="${image}" alt="صورة النشاط ${index + 1}" class="gallery-img" onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjI1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjI1MCIgZmlsbD0iIzJlN2QzMiIvPjx0ZXh0IHg9IjE1MCIgeT0iMTI1IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTYiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+Q0VSVDk1PC90ZXh0Pjwvc3ZnPg=='">
-                </div>
-            `).join('');
+            container.innerHTML = allGalleryItems.map(item => {
+                if (item.type === 'video') {
+                    return `
+                        <div class="video-container">
+                            <img src="${item.thumbnail || './default-video-thumb.jpg'}" 
+                                 alt="${escapeHtml(item.title || 'فيديو النشاط')}" 
+                                 class="video-thumbnail"
+                                 onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iIzAwMDAwMCIvPjx0ZXh0IHg9IjE1MCIgeT0iMTAwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj7Yp9mE2K8g2KfZhNin2KjZhiDYp9mE2YbYr9ix2YjYsTwvdGV4dD48L3N2Zz4=';">
+                            <div class="play-btn" onclick="window.open('${item.url}', '_blank')">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    return `
+                        <div class="gallery-item" onclick="openLightbox(${item.index})">
+                            <img src="${item.src}" alt="صورة النشاط ${item.index + 1}" class="gallery-img" onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjI1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjI1MCIgZmlsbD0iIzJlN2QzMiIvPjx0ZXh0IHg9IjE1MCIgeT0iMTI1IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTYiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+Q0VSVDk1PC90ZXh0Pjwvc3ZnPg==';">
+                        </div>
+                    `;
+                }
+            }).join('');
         }
 
         function displayAllActivities() {
@@ -685,14 +869,18 @@
                 });
                 
                 const firstImage = activity.images && activity.images[0] ? activity.images[0] : '';
+                const hasVideo = activity.videos && activity.videos.length > 0;
                 
                 return `
                     <div class="activity-card">
-                        <img src="${firstImage}" alt="${escapeHtml(activity.title)}" class="card-img" onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iIzE1NjVDMCIvPjx0ZXh0IHg9IjE1MCIgeT0iMTAwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5DRVJUOTU8L3RleHQ+PC9zdmc+'; this.alt='${escapeHtml(activity.title)}'">
+                        <img src="${firstImage}" alt="${escapeHtml(activity.title)}" class="card-img" onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iIzE1NjVDMCIvPjx0ZXh0IHg9IjE1MCIgeT0iMTAwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5DRVJUOTU8L3RleHQ+PC9zdmc+';">
                         <div class="card-content">
                             <h4>${escapeHtml(activity.title)}</h4>
                             <p>${escapeHtml(activity.description.substring(0, 100))}...</p>
-                            <div class="card-date">${formattedDate}</div>
+                            <div class="card-date">
+                                ${formattedDate}
+                                ${hasVideo ? '<i class="fas fa-video" style="margin-right: 5px; color: var(--accent);"></i>' : ''}
+                            </div>
                             <a href="activity-details.html?id=${activity.id}" class="card-link">
                                 عرض التفاصيل <i class="fas fa-arrow-left"></i>
                             </a>
@@ -720,13 +908,25 @@
             });
 
             prevBtn.addEventListener('click', () => {
-                currentImageIndex = (currentImageIndex - 1 + allGalleryImages.length) % allGalleryImages.length;
-                lightboxImg.src = allGalleryImages[currentImageIndex];
+                let newIndex = currentImageIndex - 1;
+                while (newIndex >= 0 && allGalleryItems[newIndex].type !== 'image') {
+                    newIndex--;
+                }
+                if (newIndex >= 0) {
+                    currentImageIndex = newIndex;
+                    lightboxImg.src = allGalleryItems[currentImageIndex].src;
+                }
             });
 
             nextBtn.addEventListener('click', () => {
-                currentImageIndex = (currentImageIndex + 1) % allGalleryImages.length;
-                lightboxImg.src = allGalleryImages[currentImageIndex];
+                let newIndex = currentImageIndex + 1;
+                while (newIndex < allGalleryItems.length && allGalleryItems[newIndex].type !== 'image') {
+                    newIndex++;
+                }
+                if (newIndex < allGalleryItems.length) {
+                    currentImageIndex = newIndex;
+                    lightboxImg.src = allGalleryItems[currentImageIndex].src;
+                }
             });
 
             // إغلاق بالزر ESC
@@ -743,13 +943,18 @@
 
         // دالة لفتح Lightbox
         window.openLightbox = function(index) {
-            if (!allGalleryImages || allGalleryImages.length === 0) return;
+            // البحث عن أقرب صورة
+            let imageIndex = index;
+            while (imageIndex >= 0 && allGalleryItems[imageIndex].type !== 'image') {
+                imageIndex--;
+            }
+            if (imageIndex < 0) return;
             
-            currentImageIndex = index;
+            currentImageIndex = imageIndex;
             const lightbox = document.getElementById('lightbox');
             const lightboxImg = document.getElementById('lightboxImg');
             
-            lightboxImg.src = allGalleryImages[currentImageIndex];
+            lightboxImg.src = allGalleryItems[currentImageIndex].src;
             lightbox.classList.add('active');
         }
 
