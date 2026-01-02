@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -433,9 +434,14 @@
 
         .activity-img {
             width: 100%;
-            height: 220px;
+            height: 250px;
             object-fit: cover;
             display: block;
+            transition: var(--transition);
+        }
+
+        .activity-card:hover .activity-img {
+            transform: scale(1.05);
         }
 
         .activity-content {
@@ -917,7 +923,7 @@
                 order: -1;
             }
             
-            .grid-3, .activities-grid {
+            .activities-grid, .grid-3 {
                 grid-template-columns: repeat(2, 1fr);
             }
             
@@ -977,7 +983,7 @@
                 font-size: 1.5rem;
             }
             
-            .grid-2, .grid-3, .activities-grid {
+            .grid-2, .activities-grid, .grid-3 {
                 grid-template-columns: 1fr;
             }
             
@@ -1040,7 +1046,7 @@
             }
             
             .activity-img {
-                height: 180px;
+                height: 200px;
             }
         }
     </style>
@@ -1133,11 +1139,11 @@
                 <p>أبرز النشاطات والفعاليات التي قام بها فريقنا التطوعي</p>
             </div>
             
-            <div class="grid activities-grid grid-3">
+            <div class="grid activities-grid grid-4">
                 <div class="activity-card">
                     <img src="./activity1.jpg" alt="ورشة الاختراق الأخلاقي في جامعة الإمام الكاظم" class="activity-img">
                     <div class="activity-content">
-                        <span class="activity-date">أكتوبر 2023</span>
+                        <span class="activity-date">ديسمبر 2024</span>
                         <h3>ورشة الاختراق الأخلاقي</h3>
                         <p>ورشة علمية متميزة في جامعة الإمام الكاظم (ع) حول الاختراق الأخلاقي (Ethical Hacking)، بحضور واسع وتفاعل راقٍ من السادة الدكاترة والطلبة.</p>
                     </div>
@@ -1146,7 +1152,7 @@
                 <div class="activity-card">
                     <img src="./activity2.jpg" alt="تعاون مع قسم هندسة الأمن السيبراني" class="activity-img">
                     <div class="activity-content">
-                        <span class="activity-date">سبتمبر 2023</span>
+                        <span class="activity-date">نوفمبر 2024</span>
                         <h3>تعاون أكاديمي متميز</h3>
                         <p>بالتعاون مع الدكتورة هدى رئيسة قسم هندسة الأمن السيبراني، ودكتور سيف مقرر القسم، حيث كان الاستقبال والتنظيم على أعلى مستوى.</p>
                     </div>
@@ -1155,34 +1161,16 @@
                 <div class="activity-card">
                     <img src="./activity3.jpg" alt="عرض تطبيقات عملية في الورشة" class="activity-img">
                     <div class="activity-content">
-                        <span class="activity-date">أكتوبر 2023</span>
+                        <span class="activity-date">ديسمبر 2024</span>
                         <h3>تطبيقات عملية متقدمة</h3>
                         <p>تقديم محتوى علمي متقدم وتطبيقات عملية في مجال الأمن السيبراني، مما أثار إعجاب جميع الحضور من دكاترة وطلبة.</p>
                     </div>
                 </div>
                 
                 <div class="activity-card">
-                    <img src="./activity4.jpg" alt="تفاعل الحضور مع فريق CERT95" class="activity-img">
+                    <img src="./activity4.jpg" alt="خاتمة الورشة والتكريم" class="activity-img">
                     <div class="activity-content">
-                        <span class="activity-date">أكتوبر 2023</span>
-                        <h3>تفاعل وتواصل مع الطلبة</h3>
-                        <p>نجاح الفريق في إبهار جميع الحضور بالمحتوى العلمي المتقدم، والتطبيق العملي، والأسلوب الاحترافي الراقي في التواصل.</p>
-                    </div>
-                </div>
-                
-                <div class="activity-card">
-                    <img src="./activity5.jpg" alt="فريق CERT95 أثناء الورشة" class="activity-img">
-                    <div class="activity-content">
-                        <span class="activity-date">أكتوبر 2023</span>
-                        <h3>تميز فريق CERT95</h3>
-                        <p>أثبت فريق CERT95 مرةً أخرى أنه فريق يعتمد عليه علميًا وعمليًا، بعرض أداء احترافي عالي المستوى يعكس صورة مشرّفة عن العلم الحقيقي.</p>
-                    </div>
-                </div>
-                
-                <div class="activity-card">
-                    <img src="./activity6.jpg" alt="خاتمة الورشة والتكريم" class="activity-img">
-                    <div class="activity-content">
-                        <span class="activity-date">أكتوبر 2023</span>
+                        <span class="activity-date">ديسمبر 2024</span>
                         <h3>نجاح باهر وتكريم</h3>
                         <p>ختام الورشة بنجاح باهر وتكريم أعضاء فريق CERT95 على تميزهم وإنجازهم الرائع في نشر الوعي الأمني.</p>
                     </div>
@@ -1373,11 +1361,11 @@
                         <a href="https://t.me/AhmedCERT95" target="_blank" rel="noopener noreferrer" class="social-link">
                             <i class="fab fa-telegram"></i>
                         </a>
+                        <a href="https://www.instagram.com/cert95_team/?igsh=MjZ0OWo4cTdhM2p1" target="_blank" rel="noopener noreferrer" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
                         <a href="https://www.tiktok.com/@cybersecurit95?_r=1&_t=ZS-91oBnZTuQTf" target="_blank" rel="noopener noreferrer" class="social-link">
                             <i class="fab fa-tiktok"></i>
-                        </a>
-                        <a href="https://www.instagram.com/cert95_team?igsh=MjZ0OWo4cTdhM2p1" class="social-link">
-                            <i class="fab fa-instagram"></i>
                         </a>
                     </div>
                     
@@ -1453,15 +1441,15 @@
                     <h3>وسائل التواصل</h3>
                     <ul class="footer-links">
                         <li><a href="https://t.me/AhmedCERT95" target="_blank" rel="noopener noreferrer">تليجرام قائد الفريق</a></li>
+                        <li><a href="https://www.instagram.com/cert95_team/?igsh=MjZ0OWo4cTdhM2p1" target="_blank" rel="noopener noreferrer">انستغرام الفريق</a></li>
                         <li><a href="https://www.tiktok.com/@cybersecurit95" target="_blank" rel="noopener noreferrer">تيك توك الفريق</a></li>
-                        <li><a href="#">انستغرام الفريق</a></li>
                         <li><a href="#contact">قنوات التواصل الأخرى</a></li>
                     </ul>
                 </div>
             </div>
             
             <div class="copyright">
-                <p>© <span id="currentYear">2023</span> فريق CERT95 التطوعي. جميع الحقوق محفوظة.</p>
+                <p>© 2025 - 31 ديسمبر فريق CERT95 التطوعي. جميع الحقوق محفوظة.</p>
                 <p>فريق الأمن السيبراني التطوعي - عمل تطوعي غير ربحي</p>
             </div>
         </div>
@@ -1498,12 +1486,6 @@
 
             // معالجة الشعارات عند تحميل الصفحة
             window.addEventListener('DOMContentLoaded', function() {
-                // تحديث السنة في حقوق النشر
-                const currentYear = document.getElementById('currentYear');
-                if (currentYear) {
-                    currentYear.textContent = new Date().getFullYear();
-                }
-                
                 const logoImg = document.getElementById('logoImg');
                 const mainLogoImg = document.getElementById('mainLogoImg');
                 const logoFallback = document.getElementById('logoFallback');
@@ -1520,26 +1502,18 @@
                             logoFallback.style.fontSize = '4rem';
                         }
                         
-                        // محاولة تحميل الصور البديلة للنشاطات
+                        // محاولة تحميل الصور البديلة للنشاطات (4 صور فقط)
                         const activityImages = document.querySelectorAll('.activity-img');
-                        activityImages.forEach(function(img, index) {
-                            const fallbackColors = ['#2E7D32', '#1565C0', '#FF8F00', '#2E7D32', '#1565C0', '#FF8F00'];
-                            const fallbackTexts = [
-                                'ورشة الاختراق الأخلاقي',
-                                'تعاون أكاديمي متميز',
-                                'تطبيقات عملية متقدمة',
-                                'تفاعل وتواصل مع الطلبة',
-                                'تميز فريق CERT95',
-                                'نجاح باهر وتكريم'
-                            ];
-                            
-                            img.onerror = function() {
+                        const totalImages = Math.min(activityImages.length, 4);
+                        
+                        for (let i = 0; i < totalImages; i++) {
+                            activityImages[i].onerror = function() {
                                 this.style.display = 'none';
                                 const parent = this.parentElement;
                                 const div = document.createElement('div');
                                 div.style.width = '100%';
-                                div.style.height = '220px';
-                                div.style.backgroundColor = fallbackColors[index];
+                                div.style.height = '250px';
+                                div.style.backgroundColor = i % 2 === 0 ? '#2E7D32' : '#1565C0';
                                 div.style.display = 'flex';
                                 div.style.alignItems = 'center';
                                 div.style.justifyContent = 'center';
@@ -1548,10 +1522,18 @@
                                 div.style.fontSize = '1.2rem';
                                 div.style.textAlign = 'center';
                                 div.style.padding = '20px';
-                                div.textContent = fallbackTexts[index];
+                                
+                                const fallbackTexts = [
+                                    'ورشة الاختراق الأخلاقي',
+                                    'تعاون أكاديمي متميز',
+                                    'تطبيقات عملية متقدمة',
+                                    'نجاح باهر وتكريم'
+                                ];
+                                
+                                div.textContent = fallbackTexts[i] || 'نشاط فريق CERT95';
                                 parent.insertBefore(div, this.nextSibling);
                             };
-                        });
+                        }
                     } else {
                         // إذا وجدت الصورة، إظهارها وإخفاء البدائل
                         if (logoFallback) logoFallback.style.display = 'none';
