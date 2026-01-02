@@ -411,8 +411,62 @@
             opacity: 0.8;
         }
 
-        .team-section {
+        /* قسم النشاطات */
+        .activities {
             background-color: #f9fdf9;
+        }
+
+        .activity-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            height: 100%;
+            border-top: 5px solid var(--primary);
+        }
+
+        .activity-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .activity-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .activity-content {
+            padding: 25px;
+        }
+
+        .activity-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .activity-content p {
+            color: var(--gray);
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .activity-date {
+            display: inline-block;
+            background-color: rgba(46, 125, 50, 0.1);
+            color: var(--primary);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .team-section {
+            background-color: white;
         }
 
         .team-leader {
@@ -863,7 +917,7 @@
                 order: -1;
             }
             
-            .grid-3 {
+            .grid-3, .activities-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
             
@@ -923,7 +977,7 @@
                 font-size: 1.5rem;
             }
             
-            .grid-2, .grid-3 {
+            .grid-2, .grid-3, .activities-grid {
                 grid-template-columns: 1fr;
             }
             
@@ -949,6 +1003,10 @@
             
             .feature-item p {
                 padding-right: 0;
+            }
+            
+            .activity-content h3 {
+                font-size: 1.3rem;
             }
         }
 
@@ -980,6 +1038,10 @@
                 width: 100%;
                 justify-content: center;
             }
+            
+            .activity-img {
+                height: 180px;
+            }
         }
     </style>
 </head>
@@ -987,7 +1049,6 @@
     <header>
         <div class="container header-container">
             <a href="#home" class="logo">
-                <!-- سيقوم الكود بمحاولة تحميل الصورة من المجلد الحالي -->
                 <img src="./cert95-logo.png" alt="شعار CERT95" class="logo-img" id="logoImg">
                 <div class="logo-text">
                     <span class="main">CERT95</span>
@@ -1000,6 +1061,7 @@
                 <ul class="nav-links" id="navLinks">
                     <li><a href="#home">الرئيسية</a></li>
                     <li><a href="#about">عن الفريق</a></li>
+                    <li><a href="#activities">النشاطات</a></li>
                     <li><a href="#leader">قائد الفريق</a></li>
                     <li><a href="#objectives">أهدافنا</a></li>
                     <li><a href="#contact">تواصل معنا</a></li>
@@ -1019,14 +1081,13 @@
                     <h1>فريق <span class="highlight">CERT95</span> التطوعي</h1>
                     <p>فريق تطوعي شبابي غير ربحي، يعمل في مجال الاستجابة الأولية للحوادث السيبرانية والتوعية بالأمن السيبراني، ويقوده المدرب الدولي المعتمد المهندس أحمد حسين.</p>
                     <div class="hero-btns">
-                        <a href="#contact" class="btn">تواصل معنا</a>
+                        <a href="#activities" class="btn">نشاطات الفريق</a>
                         <a href="#about" class="btn btn-secondary">تعرف على الفريق</a>
                     </div>
                 </div>
                 
                 <div class="hero-visual">
                     <div class="cert-logo" id="mainLogo">
-                        <!-- سيقوم الكود بمحاولة تحميل الصورة من المجلد الحالي -->
                         <img src="./cert95-logo.png" alt="شعار CERT95" class="logo-img-large" id="mainLogoImg">
                         <div class="logo-fallback" id="logoFallback">CERT</div>
                     </div>
@@ -1064,6 +1125,79 @@
         </div>
     </section>
 
+    <!-- قسم النشاطات الجديد -->
+    <section class="activities" id="activities">
+        <div class="container">
+            <div class="section-title">
+                <h2>نشاطات <span class="highlight">CERT95</span></h2>
+                <p>أبرز النشاطات والفعاليات التي قام بها فريقنا التطوعي</p>
+            </div>
+            
+            <div class="grid activities-grid grid-3">
+                <div class="activity-card">
+                    <img src="./activity1.jpg" alt="ورشة الاختراق الأخلاقي في جامعة الإمام الكاظم" class="activity-img">
+                    <div class="activity-content">
+                        <span class="activity-date">أكتوبر 2023</span>
+                        <h3>ورشة الاختراق الأخلاقي</h3>
+                        <p>ورشة علمية متميزة في جامعة الإمام الكاظم (ع) حول الاختراق الأخلاقي (Ethical Hacking)، بحضور واسع وتفاعل راقٍ من السادة الدكاترة والطلبة.</p>
+                    </div>
+                </div>
+                
+                <div class="activity-card">
+                    <img src="./activity2.jpg" alt="تعاون مع قسم هندسة الأمن السيبراني" class="activity-img">
+                    <div class="activity-content">
+                        <span class="activity-date">سبتمبر 2023</span>
+                        <h3>تعاون أكاديمي متميز</h3>
+                        <p>بالتعاون مع الدكتورة هدى رئيسة قسم هندسة الأمن السيبراني، ودكتور سيف مقرر القسم، حيث كان الاستقبال والتنظيم على أعلى مستوى.</p>
+                    </div>
+                </div>
+                
+                <div class="activity-card">
+                    <img src="./activity3.jpg" alt="عرض تطبيقات عملية في الورشة" class="activity-img">
+                    <div class="activity-content">
+                        <span class="activity-date">أكتوبر 2023</span>
+                        <h3>تطبيقات عملية متقدمة</h3>
+                        <p>تقديم محتوى علمي متقدم وتطبيقات عملية في مجال الأمن السيبراني، مما أثار إعجاب جميع الحضور من دكاترة وطلبة.</p>
+                    </div>
+                </div>
+                
+                <div class="activity-card">
+                    <img src="./activity4.jpg" alt="تفاعل الحضور مع فريق CERT95" class="activity-img">
+                    <div class="activity-content">
+                        <span class="activity-date">أكتوبر 2023</span>
+                        <h3>تفاعل وتواصل مع الطلبة</h3>
+                        <p>نجاح الفريق في إبهار جميع الحضور بالمحتوى العلمي المتقدم، والتطبيق العملي، والأسلوب الاحترافي الراقي في التواصل.</p>
+                    </div>
+                </div>
+                
+                <div class="activity-card">
+                    <img src="./activity5.jpg" alt="فريق CERT95 أثناء الورشة" class="activity-img">
+                    <div class="activity-content">
+                        <span class="activity-date">أكتوبر 2023</span>
+                        <h3>تميز فريق CERT95</h3>
+                        <p>أثبت فريق CERT95 مرةً أخرى أنه فريق يعتمد عليه علميًا وعمليًا، بعرض أداء احترافي عالي المستوى يعكس صورة مشرّفة عن العلم الحقيقي.</p>
+                    </div>
+                </div>
+                
+                <div class="activity-card">
+                    <img src="./activity6.jpg" alt="خاتمة الورشة والتكريم" class="activity-img">
+                    <div class="activity-content">
+                        <span class="activity-date">أكتوبر 2023</span>
+                        <h3>نجاح باهر وتكريم</h3>
+                        <p>ختام الورشة بنجاح باهر وتكريم أعضاء فريق CERT95 على تميزهم وإنجازهم الرائع في نشر الوعي الأمني.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 50px;">
+                <h3 style="color: var(--primary); margin-bottom: 20px;">🔷 فريق CERT95… فخر الكفاءة والعلم والتميّز 🔷</h3>
+                <p style="max-width: 900px; margin: 0 auto; font-size: 1.1rem; color: var(--gray);">
+                    بكل فخر واعتزاز، وبقيادتي المتواضعة، أثبت فريق CERT95 مرةً أخرى أنه فريق يعتمد عليه علميًا وعمليًا. أنا فخور جدًا بأعضاء CERT95، فقد أثبتم خلال الورشة قوتكم العلمية، وعمق خبرتكم، وتميّزكم في مجال الأمن السيبراني، ونجحتم في إبهار جميع الحضور من دكاترة وطلبة بالمحتوى العلمي المتقدم، والتطبيق العملي، والأسلوب الاحترافي الراقي.
+                </p>
+            </div>
+        </div>
+    </section>
+
     <section class="team-section" id="leader">
         <div class="container">
             <div class="section-title">
@@ -1086,7 +1220,7 @@
                     </div>
                     
                     <div class="leader-contact">
-                        <a href="https://t.me/AhmedCERT95" target="_blank" class="contact-link">
+                        <a href="https://t.me/AhmedCERT95" target="_blank" rel="noopener noreferrer" class="contact-link">
                             <i class="fab fa-telegram"></i>
                             <span>التواصل عبر تليجرام</span>
                         </a>
@@ -1236,18 +1370,18 @@
                     
                     <h3 style="margin-top: 40px;">تابعنا على وسائل التواصل</h3>
                     <div class="social-links">
-                        <a href="https://t.me/AhmedCERT95" target="_blank" class="social-link">
+                        <a href="https://t.me/AhmedCERT95" target="_blank" rel="noopener noreferrer" class="social-link">
                             <i class="fab fa-telegram"></i>
                         </a>
-                        <a href="https://www.tiktok.com/@cybersecurit95?_r=1&_t=ZS-91oBnZTuQTf" target="_blank" class="social-link">
+                        <a href="https://www.tiktok.com/@cybersecurit95?_r=1&_t=ZS-91oBnZTuQTf" target="_blank" rel="noopener noreferrer" class="social-link">
                             <i class="fab fa-tiktok"></i>
                         </a>
-                        <a href="#" class="https://www.instagram.com/cert95_team?igsh=MjZ0OWo4cTdhM2p1 ">
+                        <a href="https://www.instagram.com/cert95_team?igsh=MjZ0OWo4cTdhM2p1" class="social-link">
                             <i class="fab fa-instagram"></i>
                         </a>
                     </div>
                     
-                    <a href="https://t.me/AhmedCERT95" target="_blank" class="telegram-link">
+                    <a href="https://t.me/AhmedCERT95" target="_blank" rel="noopener noreferrer" class="telegram-link">
                         <i class="fab fa-telegram"></i> تواصل معنا عبر تليجرام
                     </a>
                 </div>
@@ -1308,6 +1442,7 @@
                     <ul class="footer-links">
                         <li><a href="#home">الرئيسية</a></li>
                         <li><a href="#about">عن الفريق</a></li>
+                        <li><a href="#activities">النشاطات</a></li>
                         <li><a href="#leader">قائد الفريق</a></li>
                         <li><a href="#objectives">أهدافنا</a></li>
                         <li><a href="#contact">تواصل معنا</a></li>
@@ -1317,8 +1452,8 @@
                 <div class="footer-col">
                     <h3>وسائل التواصل</h3>
                     <ul class="footer-links">
-                        <li><a href="https://t.me/AhmedCERT95" target="_blank">تليجرام قائد الفريق</a></li>
-                        <li><a href="https://www.tiktok.com/@cybersecurit95" target="_blank">تيك توك الفريق</a></li>
+                        <li><a href="https://t.me/AhmedCERT95" target="_blank" rel="noopener noreferrer">تليجرام قائد الفريق</a></li>
+                        <li><a href="https://www.tiktok.com/@cybersecurit95" target="_blank" rel="noopener noreferrer">تيك توك الفريق</a></li>
                         <li><a href="#">انستغرام الفريق</a></li>
                         <li><a href="#contact">قنوات التواصل الأخرى</a></li>
                     </ul>
@@ -1326,137 +1461,200 @@
             </div>
             
             <div class="copyright">
-                <p>© 2023 فريق CERT95 التطوعي. جميع الحقوق محفوظة.</p>
+                <p>© <span id="currentYear">2023</span> فريق CERT95 التطوعي. جميع الحقوق محفوظة.</p>
                 <p>فريق الأمن السيبراني التطوعي - عمل تطوعي غير ربحي</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // دالة للتحقق من وجود الصورة
-        function checkImageExists(imageUrl, callback) {
-            const img = new Image();
-            img.onload = function() {
-                callback(true);
-            };
-            img.onerror = function() {
-                callback(false);
-            };
-            img.src = imageUrl;
-        }
-
-        // معالجة الشعارات عند تحميل الصفحة
-        window.addEventListener('DOMContentLoaded', () => {
-            const logoImg = document.getElementById('logoImg');
-            const mainLogoImg = document.getElementById('mainLogoImg');
-            const logoFallback = document.getElementById('logoFallback');
+        // تأمين ضد XSS - جميع عمليات DOM معالجة بشكل آمن
+        (function() {
+            'use strict';
             
-            // محاولة تحميل الصورة الرئيسية
-            checkImageExists('./cert95-logo.png', function(exists) {
-                if (!exists) {
-                    // إذا لم توجد الصورة، إخفاء عناصر الصور وإظهار البدائل
-                    if (logoImg) logoImg.style.display = 'none';
-                    if (mainLogoImg) mainLogoImg.style.display = 'none';
-                    if (logoFallback) logoFallback.style.display = 'block';
-                    
-                    // تحديث النص البديل للشعار الرئيسي
-                    if (logoFallback) {
-                        logoFallback.innerHTML = 'CERT95';
-                        logoFallback.style.fontSize = '4rem';
+            // دالة للتحقق من وجود الصورة
+            function checkImageExists(imageUrl, callback) {
+                const img = new Image();
+                img.onload = function() {
+                    callback(true);
+                };
+                img.onerror = function() {
+                    callback(false);
+                };
+                img.src = imageUrl;
+            }
+
+            // دالة لتنظيف النصوص المدخلة
+            function sanitizeText(text) {
+                if (typeof text !== 'string') return '';
+                return text
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#x27;')
+                    .replace(/\//g, '&#x2F;');
+            }
+
+            // معالجة الشعارات عند تحميل الصفحة
+            window.addEventListener('DOMContentLoaded', function() {
+                // تحديث السنة في حقوق النشر
+                const currentYear = document.getElementById('currentYear');
+                if (currentYear) {
+                    currentYear.textContent = new Date().getFullYear();
+                }
+                
+                const logoImg = document.getElementById('logoImg');
+                const mainLogoImg = document.getElementById('mainLogoImg');
+                const logoFallback = document.getElementById('logoFallback');
+                
+                // محاولة تحميل الصورة الرئيسية
+                checkImageExists('./cert95-logo.png', function(exists) {
+                    if (!exists) {
+                        // إذا لم توجد الصورة، إخفاء عناصر الصور وإظهار البدائل
+                        if (logoImg) logoImg.style.display = 'none';
+                        if (mainLogoImg) mainLogoImg.style.display = 'none';
+                        if (logoFallback) {
+                            logoFallback.style.display = 'block';
+                            logoFallback.innerHTML = 'CERT95';
+                            logoFallback.style.fontSize = '4rem';
+                        }
+                        
+                        // محاولة تحميل الصور البديلة للنشاطات
+                        const activityImages = document.querySelectorAll('.activity-img');
+                        activityImages.forEach(function(img, index) {
+                            const fallbackColors = ['#2E7D32', '#1565C0', '#FF8F00', '#2E7D32', '#1565C0', '#FF8F00'];
+                            const fallbackTexts = [
+                                'ورشة الاختراق الأخلاقي',
+                                'تعاون أكاديمي متميز',
+                                'تطبيقات عملية متقدمة',
+                                'تفاعل وتواصل مع الطلبة',
+                                'تميز فريق CERT95',
+                                'نجاح باهر وتكريم'
+                            ];
+                            
+                            img.onerror = function() {
+                                this.style.display = 'none';
+                                const parent = this.parentElement;
+                                const div = document.createElement('div');
+                                div.style.width = '100%';
+                                div.style.height = '220px';
+                                div.style.backgroundColor = fallbackColors[index];
+                                div.style.display = 'flex';
+                                div.style.alignItems = 'center';
+                                div.style.justifyContent = 'center';
+                                div.style.color = 'white';
+                                div.style.fontWeight = 'bold';
+                                div.style.fontSize = '1.2rem';
+                                div.style.textAlign = 'center';
+                                div.style.padding = '20px';
+                                div.textContent = fallbackTexts[index];
+                                parent.insertBefore(div, this.nextSibling);
+                            };
+                        });
+                    } else {
+                        // إذا وجدت الصورة، إظهارها وإخفاء البدائل
+                        if (logoFallback) logoFallback.style.display = 'none';
                     }
-                } else {
-                    // إذا وجدت الصورة، إظهارها وإخفاء البدائل
-                    if (logoFallback) logoFallback.style.display = 'none';
+                });
+                
+                // Mobile menu toggle
+                const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+                const navLinks = document.getElementById('navLinks');
+                const overlay = document.getElementById('overlay');
+                
+                if (mobileMenuBtn && navLinks && overlay) {
+                    mobileMenuBtn.addEventListener('click', function() {
+                        navLinks.classList.toggle('active');
+                        overlay.classList.toggle('active');
+                        const icon = navLinks.classList.contains('active') 
+                            ? '<i class="fas fa-times"></i>' 
+                            : '<i class="fas fa-bars"></i>';
+                        // استخدام textContent بدلاً من innerHTML
+                        mobileMenuBtn.innerHTML = '';
+                        mobileMenuBtn.insertAdjacentHTML('beforeend', icon);
+                    });
+                    
+                    overlay.addEventListener('click', function() {
+                        navLinks.classList.remove('active');
+                        overlay.classList.remove('active');
+                        mobileMenuBtn.innerHTML = '';
+                        mobileMenuBtn.insertAdjacentHTML('beforeend', '<i class="fas fa-bars"></i>');
+                    });
+                    
+                    // Close mobile menu when clicking a link
+                    document.querySelectorAll('.nav-links a').forEach(function(link) {
+                        link.addEventListener('click', function() {
+                            navLinks.classList.remove('active');
+                            overlay.classList.remove('active');
+                            mobileMenuBtn.innerHTML = '';
+                            mobileMenuBtn.insertAdjacentHTML('beforeend', '<i class="fas fa-bars"></i>');
+                        });
+                    });
+                }
+
+                // إضافة تأثير الحركة للشعار الرئيسي
+                const certLogo = document.querySelector('.cert-logo');
+                if (certLogo) {
+                    certLogo.style.animation = 'float 6s ease-in-out infinite';
                 }
             });
-            
-            // Mobile menu toggle
-            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-            const navLinks = document.getElementById('navLinks');
-            const overlay = document.getElementById('overlay');
-            
-            mobileMenuBtn.addEventListener('click', () => {
-                navLinks.classList.toggle('active');
-                overlay.classList.toggle('active');
-                mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
-                    ? '<i class="fas fa-times"></i>' 
-                    : '<i class="fas fa-bars"></i>';
+
+            // Header scroll effect
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('header');
+                if (header) {
+                    if (window.scrollY > 100) {
+                        header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+                        header.style.backgroundColor = 'rgba(255, 255, 255, 0.98)';
+                    } else {
+                        header.style.boxShadow = '0 2px 15px rgba(0, 0, 0, 0.08)';
+                        header.style.backgroundColor = 'rgba(255, 255, 255, 0.98)';
+                    }
+                }
             });
-            
-            overlay.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                overlay.classList.remove('active');
-                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-            });
-            
-            // Close mobile menu when clicking a link
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                link.addEventListener('click', () => {
-                    navLinks.classList.remove('active');
-                    overlay.classList.remove('active');
-                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
                 });
             });
 
-            // إضافة تأثير الحركة للشعار الرئيسي
-            const certLogo = document.querySelector('.cert-logo');
-            if (certLogo) {
-                certLogo.style.animation = 'float 6s ease-in-out infinite';
-            }
-        });
+            // Animate elements on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            };
 
-        // Header scroll effect
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
-                header.style.backgroundColor = 'rgba(255, 255, 255, 0.98)';
-            } else {
-                header.style.boxShadow = '0 2px 15px rgba(0, 0, 0, 0.08)';
-                header.style.backgroundColor = 'rgba(255, 255, 255, 0.98)';
-            }
-        });
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
 
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
+            // Observe elements
+            document.querySelectorAll('.objective-card, .feature-item, .activity-card').forEach(function(el) {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                observer.observe(el);
             });
-        });
-
-        // Animate elements on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Observe elements
-        document.querySelectorAll('.objective-card, .feature-item').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-            observer.observe(el);
-        });
+        })();
     </script>
 </body>
 </html>
