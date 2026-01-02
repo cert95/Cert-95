@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أخبار CERT95</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2E7D32;
+            --secondary: #1565C0;
+            --accent: #FF8F00;
+            --dark: #0A1A0F;
+            --light: #F5F9F6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: linear-gradient(135deg, #0A1A0F 0%, #1B3A1B 100%);
+            color: white;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .news-widget-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .widget-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--primary);
+        }
+
+        .widget-header h1 {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .widget-header p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+        }
+
+        .highlight {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* شريط الأخبار الرئيسي */
+        .news-ticker-container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .ticker-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .ticker-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .ticker-title i {
+            font-size: 2rem;
+            color: var(--accent);
+        }
+
+        .ticker-title h2 {
+            font-size: 1.8rem;
+        }
+
+        .live-badge {
+            background: linear-gradient(135deg, #FF5722, #FF9800);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* نمط الشريط التمرير */
+        .news-ticker {
+            overflow: hidden;
+            height: 500px;
+            position: relative;
+        }
+
+        .ticker-track {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            animation: scrollTicker 20s linear infinite;
+        }
+
+        @keyframes scrollTicker {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-50%); }
+        }
+
+        .news-ticker:hover .ticker-track {
+            animation-play-state: paused;
+        }
+
+        /* بطاقة الخبر في الشريط */
+        .ticker-item {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            border-right: 4px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ticker-item:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateX(-10px);
+            border-right-color: var(--accent);
+        }
+
+        .ticker-item.featured {
+            background: linear-gradient(135deg, rgba(46, 125, 50, 0.2), rgba(21, 101, 192, 0.2));
+            border: 2px solid var(--accent);
+        }
+
+        .news-date {
+            background: rgba(0, 0, 0, 0.3);
+            color: var(--accent);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            display: inline-block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .news-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .news-excerpt {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .news-category {
+            display: inline-block;
+            background: rgba(46, 125, 50, 0.3);
+            color: #4CAF50;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        .read-more-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            padding: 8px 16px;
+            background: rgba(255, 143, 0, 0.1);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 143, 0, 0.3);
+        }
+
+        .read-more-btn:hover {
+            background: rgba(255, 143, 0, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 143, 0, 0.2);
+        }
+
+        /* قسم قائمة الأخبار */
+        .news-list-container {
+            margin-top: 40px;
+        }
+
+        .list-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--secondary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .news-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .list-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 15px;
+            transition: all 0.3s ease;
+            border-left: 3px solid var(--secondary);
+        }
+
+        .list-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* زر الرجوع */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 12px 25px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 10px;
+            margin-top: 30px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .back-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        /* قسم الأحصائيات */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            border-top: 4px solid var(--primary);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+
+        /* حالة التحميل */
+        .loading {
+            text-align: center;
+            padding: 50px;
+        }
+
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-left-color: var(--accent);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* تخصيصات للشريط */
+        .ticker-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .ticker-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .ticker-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+
+        /* تصميم متجاوب */
+        @media (max-width: 768px) {
+            .widget-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .news-ticker {
+                height: 400px;
+            }
+            
+            .ticker-header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .ticker-title h2 {
+                font-size: 1.4rem;
+            }
+            
+            .news-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .news-widget-container {
+                padding: 10px;
+            }
+            
+            .news-ticker-container {
+                padding: 15px;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="news-widget-container">
+        <div class="widget-header">
+            <h1>أخبار <span class="highlight">CERT95</span></h1>
+            <p>آخر المستجدات والفعاليات الخاصة بفريق الأمن السيبراني التطوعي</p>
+        </div>
+
+        <!-- إحصائيات سريعة -->
+        <div class="stats-container" id="statsContainer">
+            <!-- سيتم ملؤها بالجافاسكريبت -->
+        </div>
+
+        <!-- شريط الأخبار المتحرك -->
+        <div class="news-ticker-container">
+            <div class="ticker-header">
+                <div class="ticker-title">
+                    <i class="fas fa-newspaper"></i>
+                    <h2>شريط أخبار CERT95</h2>
+                    <span class="live-badge">مباشر</span>
+                </div>
+                <div class="ticker-controls">
+                    <button class="ticker-btn" id="pauseBtn" title="إيقاف/تشغيل">
+                        <i class="fas fa-pause"></i>
+                    </button>
+                    <button class="ticker-btn" id="prevBtn" title="السابق">
+                        <i class="fas fa-chevron-up"></i>
+                    </button>
+                    <button class="ticker-btn" id="nextBtn" title="التالي">
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="news-ticker" id="newsTicker">
+                <div class="ticker-track" id="tickerTrack">
+                    <!-- سيتم ملؤها بالجافاسكريبت -->
+                </div>
+            </div>
+        </div>
+
+        <!-- قائمة الأخبار الكاملة -->
+        <div class="news-list-container">
+            <h3 class="list-title">
+                <i class="fas fa-list"></i>
+                قائمة الأخبار الكاملة
+            </h3>
+            <div class="news-list" id="newsList">
+                <!-- سيتم ملؤها بالجافاسكريبت -->
+            </div>
+        </div>
+
+        <!-- زر الرجوع للموقع الرئيسي -->
+        <div class="back-container">
+            <a href="index.html" class="back-btn">
+                <i class="fas fa-arrow-right"></i>
+                العودة للموقع الرئيسي
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // البيانات الأولية
+        let allNews = [];
+        let isTickerPaused = false;
+
+        // تحميل الأخبار من ملف JSON
+        async function loadNews() {
+            try {
+                const response = await fetch('news-data.json');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                allNews = data.news;
+                
+                // تحديث الإحصائيات
+                updateStats();
+                
+                // ملء الشريط المتحرك
+                populateTicker();
+                
+                // ملء قائمة الأخبار
+                populateNewsList();
+                
+                // تهيئة عناصر التحكم
+                initControls();
+                
+            } catch (error) {
+                console.error('Error loading news:', error);
+                showError();
+            }
+        }
+
+        // تحديث الإحصائيات
+        function updateStats() {
+            const statsContainer = document.getElementById('statsContainer');
+            
+            const stats = [
+                {
+                    number: allNews.length,
+                    label: 'خبر نشط'
+                },
+                {
+                    number: allNews.filter(news => news.featured).length,
+                    label: 'أخبار مميزة'
+                },
+                {
+                    number: new Set(allNews.map(news => news.category)).size,
+                    label: 'تصنيفات'
+                },
+                {
+                    number: allNews.length > 0 ? 
+                        new Date(allNews[0].date).toLocaleDateString('ar-SA') : 
+                        'لا توجد',
+                    label: 'آخر تحديث'
+                }
+            ];
+            
+            statsContainer.innerHTML = stats.map(stat => `
+                <div class="stat-item">
+                    <div class="stat-number">${stat.number}</div>
+                    <div class="stat-label">${stat.label}</div>
+                </div>
+            `).join('');
+        }
+
+        // ملء الشريط المتحرك
+        function populateTicker() {
+            const tickerTrack = document.getElementById('tickerTrack');
+            
+            // مضاعفة الأخبار لتأثير التمرير السلس
+            const tickerNews = [...allNews, ...allNews];
+            
+            tickerTrack.innerHTML = tickerNews.map(news => `
+                <div class="ticker-item ${news.featured ? 'featured' : ''}">
+                    <div class="news-date">${formatDate(news.date)}</div>
+                    <div class="news-category">${getCategoryArabic(news.category)}</div>
+                    <h3 class="news-title">${escapeHtml(news.title)}</h3>
+                    <p class="news-excerpt">${escapeHtml(news.excerpt)}</p>
+                    ${news.link ? `
+                        <a href="${news.link}" target="_blank" class="read-more-btn">
+                            <i class="fas fa-external-link-alt"></i>
+                            التفاصيل الكاملة
+                        </a>
+                    ` : ''}
+                </div>
+            `).join('');
+            
+            // بدء الحركة
+            startTickerAnimation();
+        }
+
+        // ملء قائمة الأخبار
+        function populateNewsList() {
+            const newsList = document.getElementById('newsList');
+            
+            newsList.innerHTML = allNews.map(news => `
+                <div class="list-item">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 10px;">
+                        <div class="news-date">${formatDate(news.date)}</div>
+                        ${news.featured ? `
+                            <span style="background: #FF9800; color: white; padding: 3px 10px; border-radius: 12px; font-size: 0.8rem;">
+                                <i class="fas fa-star"></i> مميز
+                            </span>
+                        ` : ''}
+                    </div>
+                    <h3 style="font-size: 1.1rem; margin-bottom: 8px; color: white;">${escapeHtml(news.title)}</h3>
+                    <p style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem; margin-bottom: 15px; line-height: 1.5;">
+                        ${escapeHtml(news.excerpt)}
+                    </p>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="background: rgba(46, 125, 50, 0.3); color: #4CAF50; padding: 3px 10px; border-radius: 12px; font-size: 0.8rem;">
+                            ${getCategoryArabic(news.category)}
+                        </span>
+                        ${news.link ? `
+                            <a href="${news.link}" target="_blank" style="color: #FF9800; text-decoration: none; font-size: 0.9rem;">
+                                <i class="fas fa-external-link-alt"></i> رابط
+                            </a>
+                        ` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // تهيئة عناصر التحكم
+        function initControls() {
+            const pauseBtn = document.getElementById('pauseBtn');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const tickerTrack = document.getElementById('tickerTrack');
+
+            pauseBtn.addEventListener('click', () => {
+                isTickerPaused = !isTickerPaused;
+                if (isTickerPaused) {
+                    tickerTrack.style.animationPlayState = 'paused';
+                    pauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+                    pauseBtn.title = 'تشغيل';
+                } else {
+                    tickerTrack.style.animationPlayState = 'running';
+                    pauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                    pauseBtn.title = 'إيقاف';
+                }
+            });
+
+            prevBtn.addEventListener('click', () => {
+                const currentPosition = getComputedStyle(tickerTrack).transform;
+                const matrix = new DOMMatrix(currentPosition);
+                const currentTranslateY = matrix.m42;
+                tickerTrack.style.transform = `translateY(${currentTranslateY + 100}px)`;
+            });
+
+            nextBtn.addEventListener('click', () => {
+                const currentPosition = getComputedStyle(tickerTrack).transform;
+                const matrix = new DOMMatrix(currentPosition);
+                const currentTranslateY = matrix.m42;
+                tickerTrack.style.transform = `translateY(${currentTranslateY - 100}px)`;
+            });
+        }
+
+        // بدء حركة الشريط
+        function startTickerAnimation() {
+            const tickerTrack = document.getElementById('tickerTrack');
+            const itemHeight = 160; // ارتفاع كل عنصر تقريباً
+            const totalHeight = itemHeight * allNews.length;
+            const duration = totalHeight * 0.05; // سرعة التمرير
+
+            tickerTrack.style.animation = `scrollTicker ${duration}s linear infinite`;
+        }
+
+        // دالة مساعدة لتنسيق التاريخ
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('ar-SA', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+
+        // دالة مساعدة للحصول على التصنيف بالعربية
+        function getCategoryArabic(category) {
+            const categories = {
+                'workshop': 'ورشة عمل',
+                'event': 'فعالية',
+                'announcement': 'إعلان',
+                'security': 'نصيحة أمنية',
+                'achievement': 'إنجاز'
+            };
+            return categories[category] || category;
+        }
+
+        // دالة للأمان - منع XSS
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // عرض رسالة خطأ
+        function showError() {
+            const tickerTrack = document.getElementById('tickerTrack');
+            const newsList = document.getElementById('newsList');
+            const statsContainer = document.getElementById('statsContainer');
+            
+            tickerTrack.innerHTML = `
+                <div class="ticker-item" style="text-align: center;">
+                    <i class="fas fa-exclamation-triangle" style="font-size: 2rem; color: #FF9800; margin-bottom: 15px;"></i>
+                    <h3>عذراً، حدث خطأ في تحميل الأخبار</h3>
+                    <p>يرجى التحقق من اتصال الإنترنت أو المحاولة لاحقاً</p>
+                </div>
+            `;
+            
+            newsList.innerHTML = `
+                <div class="list-item" style="grid-column: 1 / -1; text-align: center;">
+                    <p>لا يمكن تحميل الأخبار في الوقت الحالي</p>
+                </div>
+            `;
+            
+            statsContainer.innerHTML = `
+                <div class="stat-item">
+                    <div class="stat-number">0</div>
+                    <div class="stat-label">أخبار</div>
+                </div>
+            `;
+        }
+
+        // تشغيل كل شيء عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', loadNews);
+
+        // تحديث الأخبار كل 5 دقائق
+        setInterval(loadNews, 5 * 60 * 1000);
+    </script>
+</body>
+</html>
