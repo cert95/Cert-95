@@ -16,9 +16,6 @@
             --gray: #2E3A34;
             --light-green: #E8F5E9;
             --transition: all 0.3s ease;
-            --terminal-bg: #0A1A0F;
-            --terminal-text: #00FF00;
-            --terminal-border: #2E7D32;
         }
 
         * {
@@ -257,124 +254,6 @@
             z-index: 1001;
         }
 
-        /* تيرمنال متحرك */
-        .terminal-section {
-            background-color: var(--dark);
-            padding: 60px 0;
-            border-top: 1px solid rgba(46, 125, 50, 0.2);
-            border-bottom: 1px solid rgba(46, 125, 50, 0.2);
-        }
-
-        .terminal-container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .terminal {
-            background-color: var(--terminal-bg);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            border: 2px solid var(--terminal-border);
-            font-family: 'Courier New', monospace;
-        }
-
-        .terminal-header {
-            background-color: #1a1a1a;
-            padding: 12px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid var(--terminal-border);
-        }
-
-        .terminal-title {
-            color: #ccc;
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        .terminal-controls {
-            display: flex;
-            gap: 8px;
-        }
-
-        .terminal-control {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            cursor: pointer;
-        }
-
-        .terminal-control.close {
-            background-color: #ff5f56;
-        }
-
-        .terminal-control.minimize {
-            background-color: #ffbd2e;
-        }
-
-        .terminal-control.maximize {
-            background-color: #27c93f;
-        }
-
-        .terminal-body {
-            padding: 20px;
-            height: 300px;
-            overflow-y: auto;
-            color: var(--terminal-text);
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        .terminal-line {
-            margin-bottom: 8px;
-            opacity: 0;
-            animation: fadeIn 0.5s forwards;
-        }
-
-        .terminal-prompt {
-            color: #00ccff;
-            margin-left: 5px;
-        }
-
-        .terminal-command {
-            color: var(--terminal-text);
-        }
-
-        .terminal-output {
-            color: #cccccc;
-            margin-right: 10px;
-            white-space: pre-wrap;
-        }
-
-        .terminal-cursor {
-            display: inline-block;
-            width: 8px;
-            height: 16px;
-            background-color: var(--terminal-text);
-            animation: blink 1s infinite;
-            vertical-align: middle;
-            margin-right: 2px;
-        }
-
-        .terminal-status {
-            color: #ff9900;
-            font-weight: bold;
-        }
-
-        .terminal-error {
-            color: #ff3333;
-        }
-
-        .terminal-success {
-            color: #00ff00;
-        }
-
-        .terminal-info {
-            color: #00ccff;
-        }
-
         .hero {
             padding-top: 150px;
             padding-bottom: 100px;
@@ -589,6 +468,26 @@
             font-size: 0.9rem;
             font-weight: 600;
             margin-bottom: 15px;
+        }
+
+        .activity-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 8px 16px;
+            background-color: rgba(21, 101, 192, 0.1);
+            border-radius: 8px;
+            transition: var(--transition);
+            margin-top: 10px;
+        }
+
+        .activity-link:hover {
+            background-color: rgba(21, 101, 192, 0.2);
+            transform: translateY(-2px);
         }
 
         .team-section {
@@ -1021,30 +920,6 @@
             }
         }
 
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes blink {
-            0%, 100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0;
-            }
-        }
-
-        @keyframes typing {
-            from {
-                width: 0;
-            }
-            to {
-                width: 100%;
-            }
-        }
-
         @media (max-width: 1200px) {
             .hero-content h1 {
                 font-size: 2.8rem;
@@ -1158,11 +1033,6 @@
             .activity-content h3 {
                 font-size: 1.3rem;
             }
-            
-            .terminal-body {
-                height: 250px;
-                font-size: 0.85rem;
-            }
         }
 
         @media (max-width: 576px) {
@@ -1197,11 +1067,6 @@
             .activity-img {
                 height: 200px;
             }
-            
-            .terminal-body {
-                height: 200px;
-                padding: 15px;
-            }
         }
     </style>
 </head>
@@ -1222,7 +1087,6 @@
                     <li><a href="#home">الرئيسية</a></li>
                     <li><a href="#about">عن الفريق</a></li>
                     <li><a href="#activities">النشاطات</a></li>
-                    <li><a href="#terminal">التيرمنال</a></li>
                     <li><a href="#leader">قائد الفريق</a></li>
                     <li><a href="#objectives">أهدافنا</a></li>
                     <li><a href="#contact">تواصل معنا</a></li>
@@ -1243,7 +1107,7 @@
                     <p>فريق تطوعي شبابي غير ربحي، يعمل في مجال الاستجابة الأولية للحوادث السيبرانية والتوعية بالأمن السيبراني، ويقوده المدرب الدولي المعتمد المهندس أحمد حسين.</p>
                     <div class="hero-btns">
                         <a href="#activities" class="btn">نشاطات الفريق</a>
-                        <a href="#terminal" class="btn btn-secondary">التيرمنال</a>
+                        <a href="#about" class="btn btn-secondary">تعرف على الفريق</a>
                     </div>
                 </div>
                 
@@ -1252,30 +1116,6 @@
                         <img src="./cert95-logo.png" alt="شعار CERT95" class="logo-img-large" id="mainLogoImg">
                         <div class="logo-fallback" id="logoFallback">CERT</div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- قسم التيرمنال المتحرك -->
-    <section class="terminal-section" id="terminal">
-        <div class="container terminal-container">
-            <div class="section-title" style="color: white;">
-                <h2 style="color: white;">نظام <span class="highlight" style="color: #00FF00;">التيرمنال</span> التفاعلي</h2>
-                <p style="color: #cccccc;">محاكاة لنظام تحليل الأمن السيبراني</p>
-            </div>
-            
-            <div class="terminal">
-                <div class="terminal-header">
-                    <div class="terminal-title">root@cert95:~</div>
-                    <div class="terminal-controls">
-                        <div class="terminal-control close"></div>
-                        <div class="terminal-control minimize"></div>
-                        <div class="terminal-control maximize"></div>
-                    </div>
-                </div>
-                <div class="terminal-body" id="terminalOutput">
-                    <!-- المحتوى سيتم إضافته عبر JavaScript -->
                 </div>
             </div>
         </div>
@@ -1310,7 +1150,7 @@
         </div>
     </section>
 
-    <!-- قسم النشاطات الجديد -->
+    <!-- قسم النشاطات -->
     <section class="activities" id="activities">
         <div class="container">
             <div class="section-title">
@@ -1322,36 +1162,48 @@
                 <div class="activity-card">
                     <img src="./activity1.jpg" alt="ورشة الاختراق الأخلاقي في جامعة الإمام الكاظم" class="activity-img">
                     <div class="activity-content">
-                        <span class="activity-date">ديسمبر 2024</span>
+                        <span class="activity-date">يناير 2025</span>
                         <h3>ورشة الاختراق الأخلاقي</h3>
                         <p>ورشة علمية متميزة في جامعة الإمام الكاظم (ع) حول الاختراق الأخلاقي (Ethical Hacking)، بحضور واسع وتفاعل راقٍ من السادة الدكاترة والطلبة.</p>
+                        <a href="https://url-shortener.me/5XN4" target="_blank" rel="noopener noreferrer" class="activity-link">
+                            <i class="fas fa-link"></i> مشاهدة النشاط
+                        </a>
                     </div>
                 </div>
                 
                 <div class="activity-card">
                     <img src="./activity2.jpg" alt="تعاون مع قسم هندسة الأمن السيبراني" class="activity-img">
                     <div class="activity-content">
-                        <span class="activity-date">نوفمبر 2024</span>
+                        <span class="activity-date">فبراير 2025</span>
                         <h3>تعاون أكاديمي متميز</h3>
                         <p>بالتعاون مع الدكتورة هدى رئيسة قسم هندسة الأمن السيبراني، ودكتور سيف مقرر القسم، حيث كان الاستقبال والتنظيم على أعلى مستوى.</p>
+                        <a href="https://url-shortener.me/5XN4" target="_blank" rel="noopener noreferrer" class="activity-link">
+                            <i class="fas fa-link"></i> مشاهدة النشاط
+                        </a>
                     </div>
                 </div>
                 
                 <div class="activity-card">
                     <img src="./activity3.jpg" alt="عرض تطبيقات عملية في الورشة" class="activity-img">
                     <div class="activity-content">
-                        <span class="activity-date">ديسمبر 2024</span>
+                        <span class="activity-date">مارس 2025</span>
                         <h3>تطبيقات عملية متقدمة</h3>
                         <p>تقديم محتوى علمي متقدم وتطبيقات عملية في مجال الأمن السيبراني، مما أثار إعجاب جميع الحضور من دكاترة وطلبة.</p>
+                        <a href="https://www.instagram.com/reel/DS8PauVjUgU/?igsh=Nmd2YjYzc2pjazBz" target="_blank" rel="noopener noreferrer" class="activity-link">
+                            <i class="fab fa-instagram"></i> مشاهدة الريل
+                        </a>
                     </div>
                 </div>
                 
                 <div class="activity-card">
                     <img src="./activity4.jpg" alt="خاتمة الورشة والتكريم" class="activity-img">
                     <div class="activity-content">
-                        <span class="activity-date">ديسمبر 2024</span>
+                        <span class="activity-date">أبريل 2025</span>
                         <h3>نجاح باهر وتكريم</h3>
                         <p>ختام الورشة بنجاح باهر وتكريم أعضاء فريق CERT95 على تميزهم وإنجازهم الرائع في نشر الوعي الأمني.</p>
+                        <a href="https://www.instagram.com/reel/DS8PauVjUgU/?igsh=Nmd2YjYzc2pjazBz" target="_blank" rel="noopener noreferrer" class="activity-link">
+                            <i class="fab fa-instagram"></i> مشاهدة الريل
+                        </a>
                     </div>
                 </div>
             </div>
@@ -1610,7 +1462,6 @@
                         <li><a href="#home">الرئيسية</a></li>
                         <li><a href="#about">عن الفريق</a></li>
                         <li><a href="#activities">النشاطات</a></li>
-                        <li><a href="#terminal">التيرمنال</a></li>
                         <li><a href="#leader">قائد الفريق</a></li>
                         <li><a href="#objectives">أهدافنا</a></li>
                         <li><a href="#contact">تواصل معنا</a></li>
@@ -1629,7 +1480,7 @@
             </div>
             
             <div class="copyright">
-                <p>© 2024 - 31 ديسمبر فريق CERT95 التطوعي. جميع الحقوق محفوظة.</p>
+                <p>© 2025 - 31 ديسمبر فريق CERT95 التطوعي. جميع الحقوق محفوظة.</p>
                 <p>فريق الأمن السيبراني التطوعي - عمل تطوعي غير ربحي</p>
             </div>
         </div>
@@ -1662,116 +1513,6 @@
                     .replace(/"/g, '&quot;')
                     .replace(/'/g, '&#x27;')
                     .replace(/\//g, '&#x2F;');
-            }
-
-            // دالة لإنشاء سطر جديد في التيرمنال
-            function createTerminalLine(content, type = 'output', delay = 0) {
-                return new Promise(resolve => {
-                    setTimeout(() => {
-                        const terminalOutput = document.getElementById('terminalOutput');
-                        if (!terminalOutput) return resolve();
-                        
-                        const line = document.createElement('div');
-                        line.className = 'terminal-line';
-                        
-                        if (type === 'command') {
-                            line.innerHTML = `<span class="terminal-prompt">$</span> <span class="terminal-command">${sanitizeText(content)}</span>`;
-                        } else if (type === 'success') {
-                            line.innerHTML = `<span class="terminal-output terminal-success">${sanitizeText(content)}</span>`;
-                        } else if (type === 'error') {
-                            line.innerHTML = `<span class="terminal-output terminal-error">${sanitizeText(content)}</span>`;
-                        } else if (type === 'info') {
-                            line.innerHTML = `<span class="terminal-output terminal-info">${sanitizeText(content)}</span>`;
-                        } else if (type === 'status') {
-                            line.innerHTML = `<span class="terminal-output terminal-status">${sanitizeText(content)}</span>`;
-                        } else {
-                            line.innerHTML = `<span class="terminal-output">${sanitizeText(content)}</span>`;
-                        }
-                        
-                        terminalOutput.appendChild(line);
-                        terminalOutput.scrollTop = terminalOutput.scrollHeight;
-                        resolve();
-                    }, delay);
-                });
-            }
-
-            // دالة لإضافة مؤشر الكتابة
-            function addCursor() {
-                const terminalOutput = document.getElementById('terminalOutput');
-                if (!terminalOutput) return;
-                
-                const cursor = document.createElement('div');
-                cursor.className = 'terminal-line';
-                cursor.innerHTML = '<span class="terminal-prompt">$</span> <span class="terminal-cursor"></span>';
-                terminalOutput.appendChild(cursor);
-                terminalOutput.scrollTop = terminalOutput.scrollHeight;
-            }
-
-            // دالة لتشغيل محاكاة التيرمنال
-            async function runTerminalSimulation() {
-                const commands = [
-                    { text: "systemctl start cert95-service", type: "command", delay: 800 },
-                    { text: "● Starting CERT95 Security Framework...", type: "output", delay: 400 },
-                    { text: "✓ CERT95 Framework started successfully", type: "success", delay: 600 },
-                    { text: "scan --target all --mode security-audit", type: "command", delay: 800 },
-                    { text: "● Scanning system for security vulnerabilities...", type: "output", delay: 400 },
-                    { text: "● Analyzing network configurations...", type: "output", delay: 300 },
-                    { text: "● Checking firewall rules...", type: "output", delay: 300 },
-                    { text: "✓ System security status: GREEN", type: "success", delay: 500 },
-                    { text: "show --team-stats", type: "command", delay: 800 },
-                    { text: "TEAM CERT95 STATISTICS:", type: "status", delay: 300 },
-                    { text: "├── Active Members: 42", type: "output", delay: 200 },
-                    { text: "├── Security Workshops: 18", type: "output", delay: 200 },
-                    { text: "├── Incidents Handled: 127", type: "output", delay: 200 },
-                    { text: "└── Community Reach: 5,000+", type: "output", delay: 200 },
-                    { text: "monitor --social-media", type: "command", delay: 800 },
-                    { text: "● Monitoring social media channels...", type: "output", delay: 400 },
-                    { text: "✓ Telegram: @AhmedCERT95 (Active)", type: "success", delay: 300 },
-                    { text: "✓ Instagram: cert95_team (Active)", type: "success", delay: 300 },
-                    { text: "✓ TikTok: cybersecurit95 (Active)", type: "success", delay: 300 },
-                    { text: "run --cyber-awareness-program", type: "command", delay: 800 },
-                    { text: "● Starting Cyber Awareness Program...", type: "output", delay: 400 },
-                    { text: "● Targeting universities and educational institutions...", type: "output", delay: 300 },
-                    { text: "● Preparing workshop materials...", type: "output", delay: 300 },
-                    { text: "✓ Program initialized successfully", type: "success", delay: 500 },
-                    { text: "check --volunteer-network", type: "command", delay: 800 },
-                    { text: "● Checking volunteer network status...", type: "output", delay: 400 },
-                    { text: "✓ All volunteers are active and ready", type: "success", delay: 300 },
-                    { text: "✓ Network latency: 12ms", type: "success", delay: 200 },
-                    { text: "✓ Security protocols: ENCRYPTED", type: "success", delay: 200 },
-                    { text: "system --status", type: "command", delay: 1000 },
-                    { text: "==========================================", type: "info", delay: 200 },
-                    { text: "CERT95 SYSTEM STATUS REPORT", type: "status", delay: 300 },
-                    { text: "==========================================", type: "info", delay: 200 },
-                    { text: "● Operational Status: ONLINE", type: "success", delay: 200 },
-                    { text: "● Security Level: MAXIMUM", type: "success", delay: 200 },
-                    { text: "● Team Readiness: 100%", type: "success", delay: 200 },
-                    { text: "● Community Impact: HIGH", type: "success", delay: 200 },
-                    { text: "● Last Update: 31-12-2024", type: "info", delay: 200 },
-                    { text: "==========================================", type: "info", delay: 300 }
-                ];
-
-                // إضافة رسالة الترحيب
-                await createTerminalLine("Welcome to CERT95 Security Terminal", "status", 1000);
-                await createTerminalLine("Type 'help' for available commands", "info", 800);
-                await createTerminalLine("Initializing terminal session...", "output", 600);
-                
-                // تشغيل جميع الأوامر بالتسلسل
-                for (const cmd of commands) {
-                    await createTerminalLine(cmd.text, cmd.type, cmd.delay);
-                }
-                
-                // إضافة المؤشر النهائي
-                setTimeout(addCursor, 500);
-                
-                // إعادة تشغيل المحاكاة كل 60 ثانية
-                setTimeout(() => {
-                    const terminalOutput = document.getElementById('terminalOutput');
-                    if (terminalOutput) {
-                        terminalOutput.innerHTML = '';
-                        runTerminalSimulation();
-                    }
-                }, 60000);
             }
 
             // معالجة الشعارات عند تحميل الصفحة
@@ -1870,9 +1611,6 @@
                 if (certLogo) {
                     certLogo.style.animation = 'float 6s ease-in-out infinite';
                 }
-                
-                // تشغيل محاكاة التيرمنال
-                setTimeout(runTerminalSimulation, 2000);
             });
 
             // Header scroll effect
